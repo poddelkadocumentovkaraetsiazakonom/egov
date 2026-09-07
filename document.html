@@ -1,91 +1,100 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-  <title>Документ</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+
+<title>Документ</title>
 </head>
 
 <body>
-  <div class="container">
+<div class="container">
 
-    <div class="title">Удостоверение личности</div>
+<div class="title">Удостоверение личности</div>
 
-    <div class="tabs">
-      <div class="tab active" id="tabDoc">Документ</div>
-      <div class="tab" id="tabReq">Реквизиты</div>
-    </div>
+<div class="tabs">
+  <div class="tab active" id="tabDoc">Документ</div>
+  <div class="tab" id="tabReq">Реквизиты</div>
+</div>
 
-    <!-- Секция: Документ -->
-    <div id="documentSection">
-      <div class="zoom-wrapper">
-        <img src="my-id.jpg" class="document-image" id="zoomImage" alt="Удостоверение личности">
-      </div>
-      <div class="primary-btn" id="openAccessBtn">Открыть доступ</div>
-    </div>
+<div id="documentSection">
 
-    <!-- Секция: Реквизиты -->
-    <div id="requisitesSection" class="hidden">
-      <div class="info-item">
-        <div class="label">ФИО</div>
-        <div class="value">Зәрубаев Серікболсын Асхатұлы</div>
-      </div>
+<div class="zoom-wrapper">
+  <img src="my-id.jpg" class="document-image" id="zoomImage">
+</div>
 
-      <div class="info-item">
-        <div class="label">ИИН</div>
-        <div class="value">031103551653</div>
-      </div>
+<div class="primary-btn" id="openAccessBtn">Открыть доступ</div>
 
-      <div class="info-item">
-        <div class="label">Дата рождения</div>
-        <div class="value">31.11.2003</div>
-      </div>
+</div>
 
-      <div class="info-item">
-        <div class="label">Номер документа</div>
-        <div class="value">059261764</div>
-      </div>
+<div id="requisitesSection" class="hidden">
 
-      <div class="info-item">
-        <div class="label">Дата выдачи</div>
-        <div class="value">30.10.2024</div>
-      </div>
+<div class="info-item">
+  <div class="label">ФИО</div>
+  <div class="value">Зәрубаев Серікболсын Асхатұлы</div>
+</div>
 
-      <div class="info-item">
-        <div class="label">Срок выдачи</div>
-        <div class="value">29.10.2034</div>
-      </div>
+<div class="info-item">
+  <div class="label">ИИН</div>
+  <div class="value">031103551653</div>
+</div>
 
-      <div class="primary-btn" id="shareBtn">Отправить реквизиты</div>
-    </div>
+<div class="info-item">
+  <div class="label">Дата рождения</div>
+  <div class="value">31.11.2003</div>
+</div>
 
+  <div class="info-item">
+  <div class="label">Номер документа</div>
+  <div class="value">059261764</div>
+</div>
+
+  <div class="info-item">
+  <div class="label">Дата выдачи</div>
+  <div class="value">30.10.2024</div>
+</div>
+
+  <div class="info-item">
+  <div class="label">Срок выдачи</div>
+  <div class="value">29.10.2034</div>
+</div>
+
+<div class="primary-btn" id="shareBtn">Отправить реквизиты</div>
+
+</div>
+
+</div>
+
+<div id="qrModal" class="qr-modal hidden">
+  <div class="qr-sheet">
+    <div class="drag-line"></div>
+    <h2>Доступ к документу</h2>
+    <div id="qrcode"></div>
+    <div id="timer" class="timer"></div>
+    <div id="shortCode" class="short-code"></div>
   </div>
-
-  <!-- Модальное окно QR-кода -->
-  <div id="qrModal" class="qr-modal hidden">
-    <div class="qr-sheet">
-      <div class="drag-line"></div>
-      <h2>Доступ к документу</h2>
-      <div id="qrcode"></div>
-      <div id="timer" class="timer"></div>
-      <div id="shortCode" class="short-code"></div>
-    </div>
-  </div>
+</div>
 
   <script>
-    document.addEventListener("touchmove", function(e) {
-      if (!e.target.closest("pinch-zoom")) {
-        e.preventDefault();
-      }
-    }, { passive: false });
+document.addEventListener("touchmove", function(e) {
+  if (!e.target.closest("pinch-zoom")) {
+    e.preventDefault();
+  }
+}, { passive: false });
+</script>
+  
+  <script>
+document.addEventListener("gesturestart", e => e.preventDefault());
+document.addEventListener("gesturechange", e => e.preventDefault());
+document.addEventListener("gestureend", e => e.preventDefault());
+</script>
 
-    document.addEventListener("gesturestart", e => e.preventDefault());
-    document.addEventListener("gesturechange", e => e.preventDefault());
-    document.addEventListener("gestureend", e => e.preventDefault());
-  </script>
 
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
