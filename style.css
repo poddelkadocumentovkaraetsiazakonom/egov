@@ -1,169 +1,345 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  background-color: #ffffff;
   color: #000;
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: calc(85px + env(safe-area-inset-bottom));
   overscroll-behavior: none;
 }
 
-.container {
-  padding: 20px;
-  padding-bottom: 120px;
-}
-
-.title {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.doc-card {
-  background: #f2f3f7;
-  border-radius: 22px;
-  padding: 18px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  text-decoration: none;
-  color: #000;
-}
-
-.doc-card img {
-  width: 60px;
-  border-radius: 12px;
-}
-
-.tabs {
-  display: flex;
-  background: #f2f3f7;
-  border-radius: 16px;
-  padding: 4px;
-  margin-bottom: 20px;
-}
-
-.tab {
-  flex: 1;
-  text-align: center;
-  padding: 10px;
-  font-weight: 600;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-.tab.active {
-  background: #ffffff;
-}
-
-.document-image {
-  width: 100%;
-  border-radius: 20px;
-  margin-bottom: 20px;
-}
-
-.primary-btn {
-  background: #2f6df6;
-  color: #fff;
-  padding: 16px;
-  border-radius: 18px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 17px;
-  cursor: pointer;
-   position: fixed;
-  left: 20px;
-  right: 20px;
-  bottom: calc(20px + env(safe-area-inset-bottom));
-  z-index: 10;
-}
-
-.qr-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(10px);
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  z-index: 100;
-  transition: transform 0.25s ease;
-}
-
-.qr-sheet {
-  background: #fff;
-  width: 100%;
-  border-radius: 24px 24px 0 0;
-  padding: 20px;
-  text-align: center;
-}
-
-.drag-line {
-  width: 40px;
-  height: 5px;
-  background: #ccc;
-  border-radius: 10px;
-  margin: auto;
-  margin-bottom: 15px;
-}
-
-.timer {
-  color: #2f6df6;
-  font-weight: 600;
-  margin-top: 10px;
-}
-
-.short-code {
-  background: #f2f3f7;
-  padding: 12px;
-  border-radius: 14px;
-  display: inline-block;
-  margin-top: 12px;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.info-item {
-  margin-bottom: 22px;
-}
-
-.label {
-  font-size: 14px;
-  color: #8e8e93;
-}
-
-.value {
-  font-size: 18px;
-  margin-top: 4px;
-}
-
-.hidden {
-  display: none !important;
-}
-
-/* === Центрирование QR === */
-#qrcode {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-}
-
-#qrcode canvas,
-#qrcode img {
+.home-container {
+  padding: 12px 16px;
+  max-width: 500px;
   margin: 0 auto;
-  display: block;
 }
 
+/* Поисковая строка */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: calc(env(safe-area-inset-top) + 4px);
+  margin-bottom: 16px;
+}
 
-.zoom-wrapper {
-  overflow: hidden;
+.search-input {
+  flex: 1;
+  background: #f2f2f7;
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8e8e93;
+  font-size: 16px;
+}
+
+.ai-badge {
+  background: #000;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+/* Верхние горизонтальные баннеры */
+.top-banners-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  margin-bottom: 24px;
+  scrollbar-width: none;
+}
+.top-banners-scroll::-webkit-scrollbar { display: none; }
+
+.banner {
+  flex: 0 0 62%;
   border-radius: 20px;
-  touch-action: none;
+  padding: 14px;
+  color: #fff;
+  height: 115px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
 }
 
-#zoomImage {
-  width: 100%;
-  transform-origin: center center;
-  will-change: transform;
+.banner-gpt {
+  background: linear-gradient(135deg, #0d1e4c 0%, #1a4fba 100%);
+}
+
+.banner-gas {
+  background: linear-gradient(135deg, #2b62d9 0%, #4a82f6 100%);
+}
+
+.banner-sub {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.banner-title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 4px;
+}
+
+.banner-desc {
+  font-size: 10px;
+  opacity: 0.8;
+  margin-top: 4px;
+  line-height: 1.2;
+}
+
+.banner-ai-tag {
+  align-self: flex-end;
+  background: #fff;
+  color: #000;
+  font-weight: 800;
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+
+.banner-arrow {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+/* Заголовки */
+.section-header {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.margin-top {
+  margin-top: 24px;
+}
+
+/* Ряд документов */
+.docs-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.all-docs-btn {
+  background: #f2f2f7;
+  border-radius: 20px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.doc-card-item {
+  background: #eef3fe;
+  border-radius: 20px;
+  padding: 12px;
+  width: 135px;
+  text-decoration: none;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.doc-preview {
+  background: #dbe7ff;
+  border-radius: 12px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doc-coat-mini {
+  width: 18px;
+  height: 18px;
+  background: #fbc02d;
+  border-radius: 50%;
+}
+
+.doc-title {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Сетка сервисов */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px 10px;
+  margin-bottom: 28px;
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.s-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.blue-egov {
+  background: #2f6df6;
+  color: #fff;
+  flex-direction: column;
+  border-radius: 18px;
+}
+
+.egov-text {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.egov-sub {
+  font-size: 9px;
+  margin-top: 3px;
+  opacity: 0.9;
+}
+
+.icon-circle {
+  background: #fff;
+  border: 1px solid #e5e5ea;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.e-otinish-logo {
+  color: #2f6df6;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.dots-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 16px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.dot.red { background: #e53935; }
+.dot.blue { background: #1e88e5; }
+
+.text-notary {
+  color: #0d47a1;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.text-oqu {
+  color: #0d47a1;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.enbek-e {
+  color: #fb8c00;
+  font-weight: 800;
+  font-size: 26px;
+}
+
+.s-title {
+  font-size: 11px;
+  color: #3a3a3c;
+  line-height: 1.2;
+}
+
+/* Налоговый баннер */
+.tax-banner {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  border-radius: 20px;
+  padding: 16px;
+  color: #fff;
+  position: relative;
+}
+
+.tax-tag {
+  font-size: 11px;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.tax-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.tax-dots {
+  display: flex;
+  gap: 4px;
+  margin-top: 18px;
+}
+
+.tdot {
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+}
+
+.tdot.active {
+  background: #fff;
+  width: 12px;
+  border-radius: 4px;
+}
+
+/* Нижнее меню (Tab Bar) */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-top: 1px solid #e5e5ea;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 8px;
+  padding-bottom: calc(6px + env(safe-area-inset-bottom));
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #8e8e93;
+  font-size: 10px;
+}
+
+.nav-item.active {
+  color: #2f6df6;
+}
+
+.nav-item span {
+  margin-top: 3px;
 }
