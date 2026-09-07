@@ -8,14 +8,15 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="eGov Mobile">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <title>eGov Mobile</title>
 </head>
 <body>
 
-  <div class="home-container">
+  <div class="home-container" id="homePage">
     
     <!-- Поисковая строка -->
     <div class="search-bar">
@@ -58,13 +59,13 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
       </div>
 
-      <!-- Кликабельная карточка перехода к документу -->
-      <a href="document.html" class="doc-card-item">
+      <!-- Клик открывает модальное окно -->
+      <div class="doc-card-item" id="openDocCard">
         <div class="doc-preview">
           <div class="doc-coat-mini"></div>
         </div>
         <div class="doc-title">Удостоверение<br>личности</div>
-      </a>
+      </div>
     </div>
 
     <!-- Сетка сервисов -->
@@ -100,55 +101,11 @@
         </div>
         <div class="s-title">Taza Qazaqstan</div>
       </div>
-
-      <div class="service-card">
-        <div class="s-icon icon-circle dots-grid">
-          <span class="dot red"></span><span class="dot red"></span>
-          <span class="dot blue"></span><span class="dot blue"></span>
-        </div>
-        <div class="s-title">Социальный кошелек</div>
-      </div>
-
-      <div class="service-card">
-        <div class="s-icon icon-circle text-notary">
-          <span>e</span><sub>Notary</sub>
-        </div>
-        <div class="s-title">eNotary</div>
-      </div>
-
-      <div class="service-card">
-        <div class="s-icon icon-circle text-oqu">OQU</div>
-        <div class="s-title">Образование</div>
-      </div>
-
-      <div class="service-card">
-        <div class="s-icon icon-circle">
-          <span class="enbek-e">e</span>
-        </div>
-        <div class="s-title">Enbek.kz</div>
-      </div>
     </div>
-
-    <!-- Баннер Налогового кодекса -->
-    <div class="tax-banner">
-      <div class="tax-tag">Часто задаваемые вопросы</div>
-      <div class="tax-title">Вопросы и ответы<br>по Налоговому кодексу</div>
-      <div class="tax-dots">
-        <span class="tdot active"></span>
-        <span class="tdot"></span>
-        <span class="tdot"></span>
-        <span class="tdot"></span>
-        <span class="tdot"></span>
-        <span class="tdot"></span>
-        <span class="tdot"></span>
-      </div>
-    </div>
-
-    <div class="section-header margin-top">Популярные услуги</div>
 
   </div>
 
-  <!-- Нижняя панель навигации (Tab Bar iOS) -->
+  <!-- Нижняя панель навигации -->
   <div class="bottom-nav">
     <div class="nav-item active">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -186,5 +143,99 @@
     </div>
   </div>
 
+  <!-- МОДАЛЬНОЕ ОКНО ДОКУМЕНТА (iOS Sheet) -->
+  <div id="docModalOverlay" class="doc-modal-overlay hidden">
+    <div class="doc-modal-sheet">
+      
+      <!-- Шапка модального окна -->
+      <div class="doc-header">
+        <button class="icon-btn" id="closeDocBtn" aria-label="Закрыть">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="doc-header-title">Удостоверение личности</div>
+        <button class="icon-btn" aria-label="Поделиться">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+            <polyline points="16 6 12 2 8 6"></polyline>
+            <line x1="12" y1="2" x2="12" y2="15"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Вкладки -->
+      <div class="tabs">
+        <div class="tab active" id="tabDoc">Документ</div>
+        <div class="tab" id="tabReq">Реквизиты</div>
+      </div>
+
+      <div class="doc-modal-body">
+        <!-- Вкладка 1: Документ -->
+        <div id="documentSection">
+          <div class="zoom-wrapper">
+            <img src="my-id.jpg" class="document-image" id="zoomImage" alt="Удостоверение">
+          </div>
+          
+          <div class="doc-bottom-actions">
+            <button class="primary-btn" id="openAccessBtn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/>
+              </svg>
+              <span>Открыть доступ</span>
+            </button>
+            <button class="more-btn">...</button>
+          </div>
+        </div>
+
+        <!-- Вкладка 2: Реквизиты -->
+        <div id="requisitesSection" class="hidden">
+          <div class="info-item">
+            <div class="label">ФИО</div>
+            <div class="value">ЗӘРУБАЕВ СЕРІКБОЛСЫН АСХАТҰЛЫ</div>
+          </div>
+          <div class="info-item">
+            <div class="label">ИИН</div>
+            <div class="value">051103551653</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Дата рождения</div>
+            <div class="value">03.11.2005</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Номер документа</div>
+            <div class="value">059261764</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Дата выдачи</div>
+            <div class="value">30.10.2024</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Срок действия</div>
+            <div class="value">29.10.2034</div>
+          </div>
+          <div class="info-item">
+            <div class="label">Орган выдачи</div>
+            <div class="value">ҚР ІІМ</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Модалка QR-кода -->
+  <div id="qrModal" class="qr-modal hidden">
+    <div class="qr-sheet">
+      <div class="drag-line"></div>
+      <h2>Доступ к документу</h2>
+      <div id="qrcode"></div>
+      <div id="timer" class="timer"></div>
+      <div id="shortCode" class="short-code"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
