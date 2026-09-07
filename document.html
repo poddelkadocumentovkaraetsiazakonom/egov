@@ -2,151 +2,90 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <title>Удостоверение личности</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
-      background-color: #ffffff;
-      color: #000000;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      padding-bottom: calc(20px + env(safe-area-inset-bottom));
-      overscroll-behavior: none;
-    }
-
-    .container {
-      padding: 12px 16px;
-      max-width: 450px;
-      margin: 0 auto;
-      width: 100%;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Верхняя навигация / Заголовок */
-    .header {
-      margin-top: calc(env(safe-area-inset-top) + 8px);
-      margin-bottom: 20px;
-    }
-
-    .title {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin: 0;
-    }
-
-    /* Переключатель Документ / Реквизиты */
-    .tabs-wrapper {
-      background-color: #f2f2f7;
-      border-radius: 14px;
-      padding: 3px;
-      display: flex;
-      margin-bottom: 20px;
-    }
-
-    .tab {
-      flex: 1;
-      text-align: center;
-      padding: 8px 0;
-      font-size: 15px;
-      font-weight: 600;
-      border-radius: 11px;
-      color: #000000;
-      cursor: pointer;
-    }
-
-    .tab.active {
-      background-color: #ffffff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    }
-
-    /* Контейнер для изображений документа */
-    .doc-images {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      align-items: center;
-      width: 100%;
-      margin-bottom: 24px;
-    }
-
-    .doc-img {
-      width: 100%;
-      height: auto;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-      display: block;
-      object-fit: contain;
-    }
-
-    /* Синяя кнопка внизу */
-    .bottom-button-container {
-      margin-top: auto;
-      width: 100%;
-      padding-top: 10px;
-    }
-
-    .btn-blue {
-      width: 100%;
-      background-color: #2f6df6;
-      color: #ffffff;
-      border: none;
-      border-radius: 16px;
-      padding: 16px 0;
-      font-size: 17px;
-      font-weight: 600;
-      text-align: center;
-      cursor: pointer;
-      display: block;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(47, 109, 246, 0.25);
-    }
-
-    .btn-blue:active {
-      opacity: 0.85;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <title>Документ</title>
 </head>
+
 <body>
-
   <div class="container">
-    
-    <!-- Заголовок -->
-    <div class="header">
-      <h1 class="title">Удостоверение личности</h1>
+
+    <div class="title">Удостоверение личности</div>
+
+    <div class="tabs">
+      <div class="tab active" id="tabDoc">Документ</div>
+      <div class="tab" id="tabReq">Реквизиты</div>
     </div>
 
-    <!-- Табы -->
-    <div class="tabs-wrapper">
-      <div class="tab active">Документ</div>
-      <div class="tab">Реквизиты</div>
+    <!-- Секция: Документ -->
+    <div id="documentSection">
+      <div class="zoom-wrapper">
+        <img src="my-id.jpg" class="document-image" id="zoomImage" alt="Удостоверение личности">
+      </div>
+      <div class="primary-btn" id="openAccessBtn">Открыть доступ</div>
     </div>
 
-    <!-- Изображения документа (убедись, что названия файлов id_front.jpg и id_back.jpg совпадают с твоими) -->
-    <div class="doc-images">
-      <img src="id_front.jpg" alt="Лицевая сторона" class="doc-img">
-      <img src="id_back.jpg" alt="Оборотная сторона" class="doc-img">
-    </div>
+    <!-- Секция: Реквизиты -->
+    <div id="requisitesSection" class="hidden">
+      <div class="info-item">
+        <div class="label">ФИО</div>
+        <div class="value">Зәрубаев Серікболсын Асхатұлы</div>
+      </div>
 
-    <!-- Нижняя кнопка -->
-    <div class="bottom-button-container">
-      <button class="btn-blue">Открыть доступ</button>
+      <div class="info-item">
+        <div class="label">ИИН</div>
+        <div class="value">031103551653</div>
+      </div>
+
+      <div class="info-item">
+        <div class="label">Дата рождения</div>
+        <div class="value">31.11.2003</div>
+      </div>
+
+      <div class="info-item">
+        <div class="label">Номер документа</div>
+        <div class="value">059261764</div>
+      </div>
+
+      <div class="info-item">
+        <div class="label">Дата выдачи</div>
+        <div class="value">30.10.2024</div>
+      </div>
+
+      <div class="info-item">
+        <div class="label">Срок выдачи</div>
+        <div class="value">29.10.2034</div>
+      </div>
+
+      <div class="primary-btn" id="shareBtn">Отправить реквизиты</div>
     </div>
 
   </div>
 
+  <!-- Модальное окно QR-кода -->
+  <div id="qrModal" class="qr-modal hidden">
+    <div class="qr-sheet">
+      <div class="drag-line"></div>
+      <h2>Доступ к документу</h2>
+      <div id="qrcode"></div>
+      <div id="timer" class="timer"></div>
+      <div id="shortCode" class="short-code"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("touchmove", function(e) {
+      if (!e.target.closest("pinch-zoom")) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    document.addEventListener("gesturestart", e => e.preventDefault());
+    document.addEventListener("gesturechange", e => e.preventDefault());
+    document.addEventListener("gestureend", e => e.preventDefault());
+  </script>
+
+  <script src="app.js"></script>
 </body>
 </html>
