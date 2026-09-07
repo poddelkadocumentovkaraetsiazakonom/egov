@@ -5,50 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-  <!-- Верхняя панель с кнопкой "Назад" -->
-<div class="header-nav">
-  <a href="index.html" class="back-btn" aria-label="Назад">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M15 18l-6-6 6-6"/>
-    </svg>
-  </a>
-  <h1 class="title">Удостоверение личности</h1>
-</div>
+  <title>Удостоверение личности</title>
 </head>
 
 <body>
   <div class="container">
 
-   
+    <!-- Верхняя шапка документа -->
+    <div class="doc-header">
+      <a href="index.html" class="icon-btn" aria-label="Назад">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </a>
+      <div class="doc-header-title">Удостоверение личности</div>
+      <button class="icon-btn" aria-label="Поделиться">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+          <polyline points="16 6 12 2 8 6"></polyline>
+          <line x1="12" y1="2" x2="12" y2="15"></line>
+        </svg>
+      </button>
+    </div>
 
+    <!-- Вкладки -->
     <div class="tabs">
       <div class="tab active" id="tabDoc">Документ</div>
       <div class="tab" id="tabReq">Реквизиты</div>
     </div>
 
-    <!-- Секция документа -->
+    <!-- Секция 1: Документ -->
     <div id="documentSection">
       <div class="zoom-wrapper">
         <img src="my-id.jpg" class="document-image" id="zoomImage" alt="Удостоверение">
       </div>
-      <div class="primary-btn" id="openAccessBtn">Открыть доступ</div>
+
+      <div class="doc-bottom-actions">
+        <button class="primary-btn" id="openAccessBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/>
+          </svg>
+          <span>Открыть доступ</span>
+        </button>
+        <button class="more-btn">...</button>
+      </div>
     </div>
 
-    <!-- Секция реквизитов -->
+    <!-- Секция 2: Реквизиты -->
     <div id="requisitesSection" class="hidden">
       <div class="info-item">
         <div class="label">ФИО</div>
-        <div class="value">Зәрубаев Серікболсын Асхатұлы</div>
+        <div class="value">ЗӘРУБАЕВ СЕРІКБОЛСЫН АСХАТҰЛЫ</div>
       </div>
 
       <div class="info-item">
         <div class="label">ИИН</div>
-        <div class="value">031103551653</div>
+        <div class="value">051103551653</div>
       </div>
 
       <div class="info-item">
         <div class="label">Дата рождения</div>
-        <div class="value">03.11.2003</div>
+        <div class="value">03.11.2005</div>
       </div>
 
       <div class="info-item">
@@ -62,16 +80,19 @@
       </div>
 
       <div class="info-item">
-        <div class="label">Срок выдачи</div>
+        <div class="label">Срок действия</div>
         <div class="value">29.10.2034</div>
       </div>
 
-      <div class="primary-btn" id="shareBtn">Отправить реквизиты</div>
+      <div class="info-item">
+        <div class="label">Орган выдачи</div>
+        <div class="value">ҚР ІІМ</div>
+      </div>
     </div>
 
   </div>
 
-  <!-- Модальное окно с QR-кодом -->
+  <!-- Модальное окно QR-кода -->
   <div id="qrModal" class="qr-modal hidden">
     <div class="qr-sheet">
       <div class="drag-line"></div>
@@ -81,18 +102,6 @@
       <div id="shortCode" class="short-code"></div>
     </div>
   </div>
-
-  <script>
-    document.addEventListener("touchmove", function(e) {
-      if (!e.target.closest("#zoomImage")) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-
-    document.addEventListener("gesturestart", e => e.preventDefault());
-    document.addEventListener("gesturechange", e => e.preventDefault());
-    document.addEventListener("gestureend", e => e.preventDefault());
-  </script>
 
   <script src="app.js"></script>
 </body>
