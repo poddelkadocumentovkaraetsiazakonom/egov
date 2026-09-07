@@ -10,7 +10,98 @@ document.addEventListener("DOMContentLoaded", function() {
   const shareBtn = document.getElementById("shareBtn");
 
   // === Tabs ===
-  if (tabDoc && tabReq) {
+  if (tabDoc && tabReq) {document.addEventListener("DOMContentLoaded", () => {
+  const openDocCard = document.getElementById("openDocCard");
+  const closeDocBtn = document.getElementById("closeDocBtn");
+  const docModalOverlay = document.getElementById("docModalOverlay");
+
+  const tabDoc = document.getElementById("tabDoc");
+  const tabReq = document.getElementById("tabReq");
+  const documentSection = document.getElementById("documentSection");
+  const requisitesSection = document.getElementById("requisitesSection");
+
+  const openAccessBtn = document.getElementById("openAccessBtn");
+  const qrModal = document.getElementById("qrModal");
+  const qrcodeDiv = document.getElementById("qrcode");
+  const timerDiv = document.getElementById("timer");
+  const shortCodeDiv = document.getElementById("shortCode");
+
+  let timerInterval = null;
+
+  // Открыть модальное окно документа
+  openDocCard.addEventListener("click", () => {
+    docModalOverlay.classList.remove("hidden");
+  });
+
+  // Закрыть модальное окно документа
+  closeDocBtn.addEventListener("click", () => {
+    docModalOverlay.classList.add("hidden");
+  });
+
+  // Клик по затененному фону закрывает документ
+  docModalOverlay.addEventListener("click", (e) => {
+    if (e.target === docModalOverlay) {
+      docModalOverlay.classList.add("hidden");
+    }
+  });
+
+  // Переключение вкладок "Документ" / "Реквизиты"
+  tabDoc.addEventListener("click", () => {
+    tabDoc.classList.add("active");
+    tabReq.classList.remove("active");
+    documentSection.classList.remove("hidden");
+    requisitesSection.classList.add("hidden");
+  });
+
+  tabReq.addEventListener("click", () => {
+    tabReq.classList.add("active");
+    tabDoc.classList.remove("active");
+    requisitesSection.classList.remove("hidden");
+    documentSection.classList.add("hidden");
+  });
+
+  // Открытие доступа (QR-код)
+  openAccessBtn.addEventListener("click", () => {
+    qrcodeDiv.innerHTML = "";
+    const randomCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+    new QRCode(qrcodeDiv, {
+      text: "https://egov.kz/check/" + randomCode,
+      width: 180,
+      height: 180
+    });
+
+    shortCodeDiv.textContent = randomCode;
+    qrModal.classList.remove("hidden");
+
+    let timeLeft = 300;
+    updateTimerText(timeLeft);
+
+    if (timerInterval) clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      updateTimerText(timeLeft);
+      if (timeLeft <= 0) {
+        clearInterval(timerInterval);
+        qrModal.classList.add("hidden");
+      }
+    }, 1000);
+  });
+
+  function updateTimerText(seconds) {
+    const min = Math.floor(seconds / 60);
+    const sec = seconds % 60;
+    timerDiv.textContent = `Код обновится через ${min}:${sec < 10 ? "0" : ""}${sec}`;
+  }
+
+  qrModal.addEventListener("click", (e) => {
+    if (e.target === qrModal) {
+      qrModal.classList.add("hidden");
+      if (timerInterval) clearInterval(timerInterval);
+    }
+  });
+});
     tabDoc.addEventListener("click", function() {
       documentSection.classList.remove("hidden");
       requisitesSection.classList.add("hidden");
