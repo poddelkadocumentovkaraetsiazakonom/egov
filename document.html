@@ -11,32 +11,26 @@
 <body>
   <div class="container">
 
-    <!-- Верхняя шапка документа -->
+    <!-- Шапка -->
     <div class="doc-header">
       <a href="index.html" class="icon-btn" aria-label="Назад">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </a>
       <div class="doc-header-title">Удостоверение личности</div>
-      <button class="icon-btn" aria-label="Поделиться">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
-          <polyline points="16 6 12 2 8 6"></polyline>
-          <line x1="12" y1="2" x2="12" y2="15"></line>
-        </svg>
-      </button>
+      <div style="width: 36px;"></div> <!-- Пустой блок для симметрии шапки -->
     </div>
 
     <!-- Вкладки -->
     <div class="tabs">
-      <div class="tab active" id="tabDoc">Документ</div>
-      <div class="tab" id="tabReq">Реквизиты</div>
+      <div class="tab" id="tabDoc">Документ</div>
+      <div class="tab active" id="tabReq">Реквизиты</div>
     </div>
 
     <!-- Секция 1: Документ -->
-    <div id="documentSection">
+    <div id="documentSection" class="hidden">
       <div class="zoom-wrapper">
         <img src="my-id.jpg" class="document-image" id="zoomImage" alt="Удостоверение">
       </div>
@@ -52,45 +46,131 @@
       </div>
     </div>
 
-    <!-- Секция 2: Реквизиты -->
-    <div id="requisitesSection" class="hidden">
-      <div class="info-item">
-        <div class="label">ФИО</div>
-        <div class="value">ЗӘРУБАЕВ СЕРІКБОЛСЫН АСХАТҰЛЫ</div>
+    <!-- Секция 2: Реквизиты (согласно оригиналу) -->
+    <div id="requisitesSection" class="req-container">
+      
+      <div class="req-list">
+        <div class="info-item" data-copy="059261764">
+          <div class="info-text">
+            <div class="label">Номер документа</div>
+            <div class="value">059261764</div>
+          </div>
+          <button class="copy-btn" aria-label="Копировать">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b0b0b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="info-item" data-copy="051103551653">
+          <div class="info-text">
+            <div class="label">ИИН</div>
+            <div class="value">051103551653</div>
+          </div>
+          <button class="copy-btn" aria-label="Копировать">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b0b0b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="info-item" data-copy="ЗӘРУБАЕВ СЕРІКБОЛСЫН АСХАТҰЛЫ">
+          <div class="info-text">
+            <div class="label">ФИО</div>
+            <div class="value">ЗӘРУБАЕВ СЕРІКБОЛСЫН<br>АСХАТҰЛЫ</div>
+          </div>
+          <button class="copy-btn" aria-label="Копировать">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b0b0b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="info-item" data-copy="03.11.2005">
+          <div class="info-text">
+            <div class="label">Дата рождения</div>
+            <div class="value">03.11.2005</div>
+          </div>
+          <button class="copy-btn" aria-label="Копировать">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b0b0b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="info-item" data-copy="30.10.2024">
+          <div class="info-text">
+            <div class="label">Дата выдачи</div>
+            <div class="value">30.10.2024</div>
+          </div>
+          <button class="copy-btn" aria-label="Копировать">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b0b0b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="info-item" data-copy="29.10.2034">
+          <div class="info-text">
+            <div class="label">Срок выдачи</div>
+            <div class="value">29.10.2034</div>
+          </div>
+          <button class="copy-btn" aria-label="Копировать">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b0b0b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="info-item" data-copy="ҚР ІШКІ ІСТЕР МИНИСТРЛІГІ">
+          <div class="info-text">
+            <div class="label">Орган выдачи</div>
+            <div class="value">ҚР ІШКІ ІСТЕР МИНИСТРЛІГІ</div>
+          </div>
+          <button class="copy-btn" aria-label="Копировать">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b0b0b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="info-item" data-copy="ҚАЗАҚ">
+          <div class="info-text">
+            <div class="label">Национальность</div>
+            <div class="value">ҚАЗАҚ</div>
+          </div>
+          <button class="copy-btn" aria-label="Копировать">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b0b0b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <div class="info-item">
-        <div class="label">ИИН</div>
-        <div class="value">051103551653</div>
-      </div>
+      <!-- Кнопка отправить реквизиты -->
+      <button class="send-req-btn" id="sendReqBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b60e4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+          <polyline points="16 6 12 2 8 6"></polyline>
+          <line x1="12" y1="2" x2="12" y2="15"></line>
+        </svg>
+        <span>Отправить реквизиты</span>
+      </button>
 
-      <div class="info-item">
-        <div class="label">Дата рождения</div>
-        <div class="value">03.11.2005</div>
-      </div>
-
-      <div class="info-item">
-        <div class="label">Номер документа</div>
-        <div class="value">059261764</div>
-      </div>
-
-      <div class="info-item">
-        <div class="label">Дата выдачи</div>
-        <div class="value">30.10.2024</div>
-      </div>
-
-      <div class="info-item">
-        <div class="label">Срок действия</div>
-        <div class="value">29.10.2034</div>
-      </div>
-
-      <div class="info-item">
-        <div class="label">Орган выдачи</div>
-        <div class="value">ҚР ІІМ</div>
-      </div>
     </div>
 
   </div>
+
+  <!-- Уведомление о скопированном тексте -->
+  <div id="toast" class="toast hidden">Скопировано</div>
 
   <!-- Модальное окно QR-кода -->
   <div id="qrModal" class="qr-modal hidden">
