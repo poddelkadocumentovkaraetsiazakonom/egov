@@ -1,304 +1,190 @@
-let qrInterval = null;
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="app-icon.png">
 
-document.addEventListener("DOMContentLoaded", function() {
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="eGov Mobile">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="style.css">
+  <title>eGov Mobile</title>
+</head>
+<body>
 
-  const tabDoc = document.getElementById("tabDoc");
-  const tabReq = document.getElementById("tabReq");
-  const documentSection = document.getElementById("documentSection");
-  const requisitesSection = document.getElementById("requisitesSection");
-  const openBtn = document.getElementById("openAccessBtn");
-  const shareBtn = document.getElementById("shareBtn");
+  <div class="home-container">
+    
+    <!-- Поисковая строка -->
+    <div class="search-bar">
+      <div class="search-input">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8e8e93" stroke-width="2.5">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Быстрый поиск</span>
+      </div>
+      <div class="ai-badge">AI</div>
+    </div>
 
-  // === Tabs ===
-  if (tabDoc && tabReq) {document.addEventListener("DOMContentLoaded", () => {
-  const openDocCard = document.getElementById("openDocCard");
-  const closeDocBtn = document.getElementById("closeDocBtn");
-  const docModalOverlay = document.getElementById("docModalOverlay");
+    <!-- Верхние баннеры -->
+    <div class="top-banners-scroll">
+      <div class="banner banner-gpt">
+        <div class="banner-top">
+          <span class="banner-sub">egov.gpt</span>
+          <div class="banner-title">Получай услуги<br>с помощью EgovGPT</div>
+          <div class="banner-desc">Твой личный ИИ-ассистент<br>по госуслугам</div>
+        </div>
+        <div class="banner-ai-tag">AI</div>
+      </div>
 
-  const tabDoc = document.getElementById("tabDoc");
-  const tabReq = document.getElementById("tabReq");
-  const documentSection = document.getElementById("documentSection");
-  const requisitesSection = document.getElementById("requisitesSection");
+      <div class="banner banner-gas">
+        <div class="banner-top">
+          <div class="banner-title">Передача<br>показаний газа</div>
+          <div class="banner-desc">АО «QazaqGaz Aimaq»</div>
+        </div>
+        <div class="banner-arrow">›</div>
+      </div>
+    </div>
 
-  const openAccessBtn = document.getElementById("openAccessBtn");
-  const qrModal = document.getElementById("qrModal");
-  const qrcodeDiv = document.getElementById("qrcode");
-  const timerDiv = document.getElementById("timer");
-  const shortCodeDiv = document.getElementById("shortCode");
+    <!-- Раздел: Цифровые документы -->
+    <div class="section-header">Цифровые документы</div>
 
-  let timerInterval = null;
+    <div class="docs-row">
+      <div class="all-docs-btn">
+        <span>Все</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
 
-  // Открыть модальное окно документа
-  openDocCard.addEventListener("click", () => {
-    docModalOverlay.classList.remove("hidden");
-  });
+      <!-- Кликабельная карточка перехода к документу -->
+      <a href="document.html" class="doc-card-item">
+        <div class="doc-preview">
+          <div class="doc-coat-mini"></div>
+        </div>
+        <div class="doc-title">Удостоверение<br>личности</div>
+      </a>
+    </div>
 
-  // Закрыть модальное окно документа
-  closeDocBtn.addEventListener("click", () => {
-    docModalOverlay.classList.add("hidden");
-  });
+    <!-- Сетка сервисов -->
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="s-icon blue-egov">
+          <span class="egov-text">egov</span>
+          <span class="egov-sub">Госуслуги</span>
+        </div>
+      </div>
 
-  // Клик по затененному фону закрывает документ
-  docModalOverlay.addEventListener("click", (e) => {
-    if (e.target === docModalOverlay) {
-      docModalOverlay.classList.add("hidden");
-    }
-  });
+      <div class="service-card">
+        <div class="s-icon icon-circle">
+          <span class="e-otinish-logo">e</span>
+        </div>
+        <div class="s-title">eOtinish</div>
+      </div>
 
-  // Переключение вкладок "Документ" / "Реквизиты"
-  tabDoc.addEventListener("click", () => {
-    tabDoc.classList.add("active");
-    tabReq.classList.remove("active");
-    documentSection.classList.remove("hidden");
-    requisitesSection.classList.add("hidden");
-  });
+      <div class="service-card">
+        <div class="s-icon icon-circle">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2b7874" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="s-title">Закон и порядок</div>
+      </div>
 
-  tabReq.addEventListener("click", () => {
-    tabReq.classList.add("active");
-    tabDoc.classList.remove("active");
-    requisitesSection.classList.remove("hidden");
-    documentSection.classList.add("hidden");
-  });
+      <div class="service-card">
+        <div class="s-icon icon-circle">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.1 2 7a9 9 0 0 1-10 11z"/>
+          </svg>
+        </div>
+        <div class="s-title">Taza Qazaqstan</div>
+      </div>
 
-  // Открытие доступа (QR-код)
-  openAccessBtn.addEventListener("click", () => {
-    qrcodeDiv.innerHTML = "";
-    const randomCode = Math.floor(100000 + Math.random() * 900000).toString();
+      <div class="service-card">
+        <div class="s-icon icon-circle dots-grid">
+          <span class="dot red"></span><span class="dot red"></span>
+          <span class="dot blue"></span><span class="dot blue"></span>
+        </div>
+        <div class="s-title">Социальный кошелек</div>
+      </div>
 
-    new QRCode(qrcodeDiv, {
-      text: "https://egov.kz/check/" + randomCode,
-      width: 180,
-      height: 180
-    });
+      <div class="service-card">
+        <div class="s-icon icon-circle text-notary">
+          <span>e</span><sub>Notary</sub>
+        </div>
+        <div class="s-title">eNotary</div>
+      </div>
 
-    shortCodeDiv.textContent = randomCode;
-    qrModal.classList.remove("hidden");
+      <div class="service-card">
+        <div class="s-icon icon-circle text-oqu">OQU</div>
+        <div class="s-title">Образование</div>
+      </div>
 
-    let timeLeft = 300;
-    updateTimerText(timeLeft);
+      <div class="service-card">
+        <div class="s-icon icon-circle">
+          <span class="enbek-e">e</span>
+        </div>
+        <div class="s-title">Enbek.kz</div>
+      </div>
+    </div>
 
-    if (timerInterval) clearInterval(timerInterval);
+    <!-- Баннер Налогового кодекса -->
+    <div class="tax-banner">
+      <div class="tax-tag">Часто задаваемые вопросы</div>
+      <div class="tax-title">Вопросы и ответы<br>по Налоговому кодексу</div>
+      <div class="tax-dots">
+        <span class="tdot active"></span>
+        <span class="tdot"></span>
+        <span class="tdot"></span>
+        <span class="tdot"></span>
+        <span class="tdot"></span>
+        <span class="tdot"></span>
+        <span class="tdot"></span>
+      </div>
+    </div>
 
-    timerInterval = setInterval(() => {
-      timeLeft--;
-      updateTimerText(timeLeft);
-      if (timeLeft <= 0) {
-        clearInterval(timerInterval);
-        qrModal.classList.add("hidden");
-      }
-    }, 1000);
-  });
+    <div class="section-header margin-top">Популярные услуги</div>
 
-  function updateTimerText(seconds) {
-    const min = Math.floor(seconds / 60);
-    const sec = seconds % 60;
-    timerDiv.textContent = `Код обновится через ${min}:${sec < 10 ? "0" : ""}${sec}`;
-  }
+  </div>
 
-  qrModal.addEventListener("click", (e) => {
-    if (e.target === qrModal) {
-      qrModal.classList.add("hidden");
-      if (timerInterval) clearInterval(timerInterval);
-    }
-  });
-});
-    tabDoc.addEventListener("click", function() {
-      documentSection.classList.remove("hidden");
-      requisitesSection.classList.add("hidden");
-      tabDoc.classList.add("active");
-      tabReq.classList.remove("active");
-    });
+  <!-- Нижняя панель навигации (Tab Bar iOS) -->
+  <div class="bottom-nav">
+    <div class="nav-item active">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+      </svg>
+      <span>Главная</span>
+    </div>
+    <div class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7"/>
+        <rect x="14" y="3" width="7" height="7"/>
+        <rect x="14" y="14" width="7" height="7"/>
+        <rect x="3" y="14" width="7" height="7"/>
+      </svg>
+      <span>egov QR</span>
+    </div>
+    <div class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <span>Сервисы</span>
+    </div>
+    <div class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      <span>Сообщения</span>
+    </div>
+    <div class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="7" r="4"/>
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+      </svg>
+      <span>Профиль</span>
+    </div>
+  </div>
 
-    tabReq.addEventListener("click", function() {
-      documentSection.classList.add("hidden");
-      requisitesSection.classList.remove("hidden");
-      tabReq.classList.add("active");
-      tabDoc.classList.remove("active");
-    });
-  }
-
-  // === Open QR ===
-  if (openBtn) {
-    openBtn.addEventListener("click", showQR);
-  }
-
-  // === Share ===
-  if (shareBtn) {
-    shareBtn.addEventListener("click", async function() {
-      const text = `
-ФИО: Зәрубаев Серікболсын Асхатұлы
-ИИН: 031103551653
-Дата рождения: 31.11.2003
-Номер документа: 059261764
-`;
-      if (navigator.share) {
-        await navigator.share({ title: "Реквизиты", text });
-      }
-    });
-  }
-
-  // === Swipe down QR modal ===
-  const qrModal = document.getElementById("qrModal");
-  if (qrModal) {
-    let startY = 0;
-    let currentY = 0;
-    let isDragging = false;
-
-    qrModal.addEventListener("touchstart", (e) => {
-      startY = e.touches[0].clientY;
-      isDragging = true;
-    });
-
-    qrModal.addEventListener("touchmove", (e) => {
-      if (!isDragging) return;
-      currentY = e.touches[0].clientY;
-      let diff = currentY - startY;
-      if (diff > 0) qrModal.style.transform = `translateY(${diff}px)`;
-    });
-
-    qrModal.addEventListener("touchend", () => {
-      let diff = currentY - startY;
-      if (diff > 120) closeQR();
-      qrModal.style.transform = "translateY(0)";
-      isDragging = false;
-    });
-  }
-
-  // =========================
-  // === SAFE IMAGE ZOOM =====
-  // =========================
-
-  const img = document.getElementById("zoomImage");
-  const wrapper = img ? img.parentElement : null;
-
-  if (img && wrapper) {
-
-    let scale = 1;
-    let lastScale = 1;
-    let startDistance = 0;
-
-    let startX = 0;
-    let startY = 0;
-    let translateX = 0;
-    let translateY = 0;
-
-    let lastTap = 0;
-
-    function getDistance(touches) {
-      const dx = touches[0].clientX - touches[1].clientX;
-      const dy = touches[0].clientY - touches[1].clientY;
-      return Math.sqrt(dx * dx + dy * dy);
-    }
-
-    function updateTransform() {
-      img.style.transform =
-        `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-    }
-
-    function limitBounds() {
-      const rect = wrapper.getBoundingClientRect();
-      const imgW = rect.width * scale;
-      const imgH = rect.height * scale;
-
-      const maxX = (imgW - rect.width) / 2;
-      const maxY = (imgH - rect.height) / 2;
-
-      translateX = Math.max(-maxX, Math.min(maxX, translateX));
-      translateY = Math.max(-maxY, Math.min(maxY, translateY));
-    }
-
-    img.addEventListener("touchstart", (e) => {
-
-      const now = Date.now();
-      if (now - lastTap < 300) {
-        scale = scale > 1 ? 1 : 2.5;
-        translateX = 0;
-        translateY = 0;
-        updateTransform();
-      }
-      lastTap = now;
-
-      if (e.touches.length === 2) {
-        startDistance = getDistance(e.touches);
-        lastScale = scale;
-      }
-
-      if (e.touches.length === 1 && scale > 1) {
-        startX = e.touches[0].clientX - translateX;
-        startY = e.touches[0].clientY - translateY;
-      }
-
-    }, { passive: true });
-
-    img.addEventListener("touchmove", (e) => {
-
-      if (e.touches.length === 2) {
-        e.preventDefault();
-        const newDistance = getDistance(e.touches);
-        scale = lastScale * (newDistance / startDistance);
-        scale = Math.max(1, Math.min(scale, 4));
-        limitBounds();
-        updateTransform();
-      }
-
-      if (e.touches.length === 1 && scale > 1) {
-        e.preventDefault();
-        translateX = e.touches[0].clientX - startX;
-        translateY = e.touches[0].clientY - startY;
-        limitBounds();
-        updateTransform();
-      }
-
-    }, { passive: false });
-
-    img.addEventListener("touchend", () => {
-      if (scale === 1) {
-        translateX = 0;
-        translateY = 0;
-        updateTransform();
-      }
-    });
-
-  }
-
-});
-
-
-// =========================
-// === QR FUNCTIONS ========
-// =========================
-
-function showQR() {
-  const modal = document.getElementById("qrModal");
-  modal.classList.remove("hidden");
-
-  if (qrInterval) clearInterval(qrInterval);
-
-  const randomCode = Math.floor(100000 + Math.random() * 900000);
-  document.getElementById("shortCode").innerText = randomCode;
-
-  document.getElementById("qrcode").innerHTML = "";
-
-  new QRCode(document.getElementById("qrcode"), {
-    text: randomCode.toString(),
-    width: 220,
-    height: 220
-  });
-
-  let time = 60;
-  const timerEl = document.getElementById("timer");
-  timerEl.innerText = "Срок действия: 01:00";
-
-  qrInterval = setInterval(() => {
-    time--;
-    let seconds = time < 10 ? "0" + time : time;
-    timerEl.innerText = "Срок действия: 00:" + seconds;
-    if (time <= 0) closeQR();
-  }, 1000);
-}
-
-function closeQR() {
-  const modal = document.getElementById("qrModal");
-  if (qrInterval) clearInterval(qrInterval);
-  modal.classList.add("hidden");
-}
+</body>
+</html>
