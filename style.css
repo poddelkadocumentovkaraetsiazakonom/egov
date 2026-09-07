@@ -354,3 +354,33 @@ body {
 .hidden {
   display: none !important;
 }
+/* Верхняя панель с кнопкой "Назад" */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f2f2f7;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.back-btn:active {
+  background: #e5e5ea;
+}
+
+/* Сбрасываем лишние отступы у h1, чтобы красиво стоял в ряд */
+.header-nav .title {
+  margin-bottom: 0;
+  font-size: 24px;
+}
