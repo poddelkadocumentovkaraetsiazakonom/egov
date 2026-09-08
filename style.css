@@ -375,22 +375,25 @@ html, body {
 .section-header { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
 
 /* Раздел «Цифровые документы» */
+.docs-section {
+  margin-bottom: 24px;
+}
+
 .docs-row { 
   display: flex; 
   align-items: center;
   gap: 12px; 
-  margin-bottom: 28px;
   overflow-x: auto;
   scrollbar-width: none;
 }
 .docs-row::-webkit-scrollbar { display: none; }
 
-/* Компактная кнопка "Все >" */
+/* Кнопка "Все >" точно как в оригинале */
 .all-docs-btn {
   background: #f2f2f7;
   border-radius: 18px;
-  padding: 12px 18px;
-  height: 95px;
+  padding: 10px 16px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -400,57 +403,51 @@ html, body {
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
+  align-self: center;
 }
 
-/* Фиксированная маленькая карточка документа */
+/* Карточка документа под оригинал */
 .doc-card-item {
   background: #eef3fe;
-  border-radius: 18px;
-  padding: 8px;
-  width: 125px;
-  min-width: 125px;
-  max-width: 125px;
-  height: 95px;
+  border-radius: 20px;
+  padding: 10px;
+  width: 140px;
+  min-width: 140px;
+  height: 105px;
   text-decoration: none;
-  color: #000;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
   flex-shrink: 0;
-  overflow: hidden;
 }
 
+/* Область под картинку с обрезкой нижнего текста с самого изображения */
 .doc-preview {
-  background: #ffffff;
-  border-radius: 12px;
-  height: 48px;
+  height: 52px;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow: hidden;
-  position: relative;
+  border-radius: 8px;
 }
 
-/* Строгий контроль размера картинки удостоверения */
-.doc-preview img,
 .doc-preview-img {
   width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  max-height: 100% !important;
+  height: auto !important;
   object-fit: cover !important;
+  object-position: top !important; /* Показывает только верх с гербом, отсекая текст на самом фото */
   display: block;
 }
 
-.doc-coat-mini { width: 18px; height: 18px; background: #fbc02d; border-radius: 50%; }
-
+/* Подпись к документу */
 .doc-title { 
-  font-size: 11px; 
+  font-size: 13px; 
   font-weight: 600; 
-  line-height: 1.15; 
+  line-height: 1.2; 
   color: #1c1c1e;
+  margin-top: 2px;
 }
 
 .services-grid {
