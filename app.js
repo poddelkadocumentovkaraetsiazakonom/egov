@@ -9,11 +9,13 @@ document.addEventListener("DOMContentLoaded", function() {
   const openBtn = document.getElementById("openAccessBtn");
   const shareBtn = document.getElementById("shareBtn");
 
-  // === Tabs ===
+  // === Переключение вкладок ===
   if (tabDoc && tabReq) {
     tabDoc.addEventListener("click", function() {
       documentSection.classList.remove("hidden");
       requisitesSection.classList.add("hidden");
+      openBtn.classList.remove("hidden");
+      shareBtn.classList.add("hidden");
       tabDoc.classList.add("active");
       tabReq.classList.remove("active");
     });
@@ -21,32 +23,29 @@ document.addEventListener("DOMContentLoaded", function() {
     tabReq.addEventListener("click", function() {
       documentSection.classList.add("hidden");
       requisitesSection.classList.remove("hidden");
+      openBtn.classList.add("hidden");
+      shareBtn.classList.remove("hidden");
       tabReq.classList.add("active");
       tabDoc.classList.remove("active");
     });
   }
 
-  // === Open QR ===
+  // === Открытие QR ===
   if (openBtn) {
     openBtn.addEventListener("click", showQR);
   }
 
-  // === Share ===
+  // === Поделиться реквизитами ===
   if (shareBtn) {
     shareBtn.addEventListener("click", async function() {
-      const text = `
-ФИО: Зәрубаев Серікболсын Асхатұлы
-ИИН: 031103551653
-Дата рождения: 31.11.2003
-Номер документа: 059261764
-`;
+      const text = `ФИО: Зәрубаев Серікболсын Асхатұлы\nИИН: 031103551653\nДата рождения: 03.11.2003\nНомер документа: 059261764`;
       if (navigator.share) {
         await navigator.share({ title: "Реквизиты", text });
       }
     });
   }
 
-  // === Swipe down QR modal ===
+  // === Закрытие QR свайпом вниз ===
   const qrModal = document.getElementById("qrModal");
   const qrSheet = qrModal ? qrModal.querySelector(".qr-sheet") : null;
 
@@ -85,23 +84,22 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // =========================
-  // === SAFE IMAGE ZOOM =====
-  // =========================
+  // ===================================
+  // === ИСПРАВЛЕННЫЙ PINCH & PAN ZOOM ===
+  // ===================================
 
   const img = document.getElementById("zoomImage");
-  const wrapper = img ? img.parentElement : null;
+  const viewport = document.getElementById("zoomViewport");
 
-  if (img && wrapper) {
-
+  if (img && viewport) {
     let scale = 1;
     let lastScale = 1;
     let startDistance = 0;
 
-    let startX = 0;
-    let startY = 0;
     let translateX = 0;
     let translateY = 0;
+    let startX = 0;
+    let startY = 0;
 
     let lastTap = 0;
 
@@ -112,82 +110,88 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateTransform() {
-      img.style.transform =
-        `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+      img.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
     }
 
     function limitBounds() {
-      const rect = wrapper.getBoundingClientRect();
-      const imgW = rect.width * scale;
-      const imgH = rect.height * scale;
+      if (scale <= 1) {
+        translateX = 0;
+        translateY = 0;
+        return;
+      }
 
-      const maxX = (imgW - rect.width) / 2;
-      const maxY = (imgH - rect.height) / 2;
+      const rect = viewport.getBoundingClientRect();
+      const imgWidth = rect.width * scale;
+      const imgHeight = (img.offsetHeight || rect.height) * scale;
+
+      const maxX = Math.max(0, (imgWidth - rect.width) / 2);
+      const maxY = Math.max(0, (imgHeight - rect.height) / 2);
 
       translateX = Math.max(-maxX, Math.min(maxX, translateX));
       translateY = Math.max(-maxY, Math.min(maxY, translateY));
     }
 
+    // Двойной таб для Zoom In / Zoom Out
     img.addEventListener("touchstart", (e) => {
-
       const now = Date.now();
-      if (now - lastTap < 300) {
-        scale = scale > 1 ? 1 : 2.5;
-        translateX = 0;
-        translateY = 0;
+      if (e.touches.length === 1 && now - lastTap < 300) {
+        if (scale > 1) {
+          scale = 1;
+          translateX = 0;
+          translateY = 0;
+        } else {
+          scale = 2.2;
+        }
+        img.style.transition = "transform 0.25s cubic-bezier(0.1, 0.5, 0.1, 1)";
         updateTransform();
+        setTimeout(() => { img.style.transition = "none"; }, 250);
       }
       lastTap = now;
 
       if (e.touches.length === 2) {
         startDistance = getDistance(e.touches);
         lastScale = scale;
-      }
-
-      if (e.touches.length === 1 && scale > 1) {
+      } else if (e.touches.length === 1 && scale > 1) {
         startX = e.touches[0].clientX - translateX;
         startY = e.touches[0].clientY - translateY;
       }
-
     }, { passive: true });
 
     img.addEventListener("touchmove", (e) => {
-
       if (e.touches.length === 2) {
         e.preventDefault();
         const newDistance = getDistance(e.touches);
         scale = lastScale * (newDistance / startDistance);
-        scale = Math.max(1, Math.min(scale, 4));
+        scale = Math.max(1, Math.min(scale, 4.5));
         limitBounds();
         updateTransform();
-      }
-
-      if (e.touches.length === 1 && scale > 1) {
+      } else if (e.touches.length === 1 && scale > 1) {
         e.preventDefault();
         translateX = e.touches[0].clientX - startX;
         translateY = e.touches[0].clientY - startY;
         limitBounds();
         updateTransform();
       }
-
     }, { passive: false });
 
-    img.addEventListener("touchend", () => {
-      if (scale === 1) {
+    img.addEventListener("touchend", (e) => {
+      if (scale < 1) {
+        scale = 1;
         translateX = 0;
         translateY = 0;
+        img.style.transition = "transform 0.2s ease";
+        updateTransform();
+        setTimeout(() => { img.style.transition = "none"; }, 200);
+      } else {
+        limitBounds();
         updateTransform();
       }
     });
-
   }
 
 });
 
-// =========================
-// === QR FUNCTIONS ========
-// =========================
-
+// === QR-функции ===
 function showQR() {
   const modal = document.getElementById("qrModal");
   const sheet = modal.querySelector(".qr-sheet");
@@ -200,9 +204,10 @@ function showQR() {
   const randomCode = Math.floor(100000 + Math.random() * 900000);
   document.getElementById("shortCode").innerText = randomCode;
 
-  document.getElementById("qrcode").innerHTML = "";
+  const qrContainer = document.getElementById("qrcode");
+  qrContainer.innerHTML = "";
 
-  new QRCode(document.getElementById("qrcode"), {
+  new QRCode(qrContainer, {
     text: randomCode.toString(),
     width: 220,
     height: 220
