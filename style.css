@@ -392,9 +392,9 @@ html, body {
 /* Кнопка "Все >" */
 .all-docs-btn {
   background: #f2f2f7;
-  border-radius: 20px;
+  border-radius: 22px;
   width: 80px;
-  height: 98px;
+  height: 104px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -411,37 +411,48 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 124px !important;
-  max-width: 124px !important;
-  height: 98px !important;
-  max-height: 98px !important;
+  width: 136px;
+  height: 104px;
   background-color: #eef4ff;
-  border-radius: 20px;
-  padding: 8px 10px 10px 10px;
+  border-radius: 22px;
+  padding: 0 10px 10px 12px;
   box-sizing: border-box;
   text-decoration: none;
   flex-shrink: 0;
+  position: relative;
   overflow: hidden;
 }
 
-/* Вырезанная картинка карточки idcard.png */
+/* Верхняя область с маскировкой рамки id-card.png */
+.doc-card-top {
+  width: calc(100% + 20px);
+  height: 52px;
+  margin-left: -10px;
+  margin-right: -10px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Кадрирование исходного id-card.png */
 .doc-cover-img {
-  width: 100% !important;
-  height: 48px !important;
-  object-fit: contain !important;
-  object-position: center !important;
-  display: block !important;
+  width: 140%;
+  height: auto;
+  position: absolute;
+  top: -16%;
+  left: -20%;
+  object-fit: cover;
+  pointer-events: none;
 }
 
 /* Подпись под иконкой */
 .doc-title { 
-  font-size: 11px; 
-  font-weight: 500; 
-  line-height: 1.2; 
+  font-size: 13px; 
+  font-weight: 600; 
+  line-height: 1.25; 
   color: #1c1c1e;
-  margin-top: 2px;
+  letter-spacing: -0.2px;
+  margin-bottom: 2px;
 }
-
 /* Раздел «Сервисы» */
 .services-grid {
   display: grid;
