@@ -217,10 +217,33 @@ body {
   margin: 0 auto;
 }
 
-.title {
-  font-size: 28px;
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f2f2f7;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.back-btn:active {
+  background: #e5e5ea;
+}
+
+.header-nav .title {
+  margin-bottom: 0;
+  font-size: 24px;
   font-weight: 700;
-  margin-bottom: 20px;
 }
 
 .tabs {
@@ -277,6 +300,20 @@ body {
   margin: 0 auto;
 }
 
+.info-item {
+  margin-bottom: 22px;
+}
+
+.label {
+  font-size: 14px;
+  color: #8e8e93;
+}
+
+.value {
+  font-size: 18px;
+  margin-top: 4px;
+}
+
 /* Модальное окно QR */
 .qr-modal {
   position: fixed;
@@ -287,7 +324,6 @@ body {
   justify-content: center;
   align-items: flex-end;
   z-index: 200;
-  transition: transform 0.25s ease;
 }
 
 .qr-sheet {
@@ -297,6 +333,7 @@ body {
   border-radius: 24px 24px 0 0;
   padding: 20px;
   text-align: center;
+  will-change: transform;
 }
 
 .drag-line {
@@ -337,49 +374,6 @@ body {
   font-weight: 600;
 }
 
-.info-item {
-  margin-bottom: 22px;
-}
-
-.label {
-  font-size: 14px;
-  color: #8e8e93;
-}
-
-.value {
-  font-size: 18px;
-  margin-top: 4px;
-}
-/* Верхняя панель с кнопкой "Назад" */
-.header-nav {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.back-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #f2f2f7;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-  flex-shrink: 0;
-}
-
-.back-btn:active {
-  background: #e5e5ea;
-}
-
-/* Сбрасываем лишние отступы у h1, чтобы красиво стоял в ряд */
-.header-nav .title {
-  margin-bottom: 0;
-  font-size: 24px;
-}
 .hidden {
   display: none !important;
 }
