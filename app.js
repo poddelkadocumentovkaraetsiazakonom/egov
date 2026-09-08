@@ -46,30 +46,42 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // === Swipe down QR modal ===
+ // === Swipe down QR modal ===
   const qrModal = document.getElementById("qrModal");
-  if (qrModal) {
+  const qrSheet = qrModal ? qrModal.querySelector(".qr-sheet") : null;
+
+  if (qrModal && qrSheet) {
     let startY = 0;
     let currentY = 0;
     let isDragging = false;
 
-    qrModal.addEventListener("touchstart", (e) => {
+    qrSheet.addEventListener("touchstart", (e) => {
       startY = e.touches[0].clientY;
       isDragging = true;
+      qrSheet.style.transition = "none";
     });
 
-    qrModal.addEventListener("touchmove", (e) => {
+    qrSheet.addEventListener("touchmove", (e) => {
       if (!isDragging) return;
       currentY = e.touches[0].clientY;
       let diff = currentY - startY;
-      if (diff > 0) qrModal.style.transform = `translateY(${diff}px)`;
+      if (diff > 0) {
+        qrSheet.style.transform = `translateY(${diff}px)`;
+      }
     });
 
-    qrModal.addEventListener("touchend", () => {
+    qrSheet.addEventListener("touchend", () => {
+      if (!isDragging) return;
       let diff = currentY - startY;
-      if (diff > 120) closeQR();
-      qrModal.style.transform = "translateY(0)";
+      qrSheet.style.transition = "transform 0.2s ease";
+      if (diff > 120) {
+        closeQR();
+      } else {
+        qrSheet.style.transform = "translateY(0)";
+      }
       isDragging = false;
+      startY = 0;
+      currentY = 0;
     });
   }
 
