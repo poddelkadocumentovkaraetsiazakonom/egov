@@ -380,30 +380,29 @@ html, body {
   font-size: 15px;
 }
 
-.doc-card-item {
-  background: #eef3fe;
-  border-radius: 20px;
-  padding: 12px;
+/* === СТИЛИ КАРТОЧКИ ДОКУМЕНТА С ОРИГИНАЛЬНОЙ КАРТИНКОЙ === */
+.doc-card-link {
+  display: block;
   width: 135px;
   text-decoration: none;
-  color: #000;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
-.doc-preview {
-  background: #dbe7ff;
-  border-radius: 12px;
-  height: 46px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.doc-card-link:active {
+  opacity: 0.85;
+  transform: scale(0.97);
 }
 
-.doc-coat-mini { width: 18px; height: 18px; background: #fbc02d; border-radius: 50%; }
-.doc-title { font-size: 12px; font-weight: 600; line-height: 1.2; }
+.doc-card-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
 
+/* === СТИЛИ ИКОНОК И СЕРВИСОВ === */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -423,6 +422,12 @@ html, body {
   margin-bottom: 6px;
 }
 
+.service-img-icon {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
 .blue-egov { background: #2f6df6; color: #fff; flex-direction: column; border-radius: 18px; }
 .egov-text { font-size: 16px; font-weight: 800; line-height: 1; }
 .egov-sub { font-size: 9px; margin-top: 3px; opacity: 0.9; }
@@ -440,6 +445,21 @@ html, body {
 .enbek-e { color: #fb8c00; font-weight: 800; font-size: 26px; }
 .s-title { font-size: 11px; color: #3a3a3c; line-height: 1.2; }
 
+/* Баннер налогового кодекса */
+.tax-banner-wrapper {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.tax-banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Нижнее меню */
 .bottom-nav {
   position: fixed;
   bottom: 0;
