@@ -183,3 +183,169 @@ body {
   justify-content: center;
   cursor: pointer;
 }
+/* Страница документа */
+.doc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  height: 44px;
+}
+
+.close-btn {
+  background: #f2f2f7;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #000;
+}
+
+.header-title {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.top-share-btn {
+  background: #f2f2f7;
+  border: none;
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #000;
+}
+
+/* Переключатель вкладок */
+.tabs-container {
+  display: flex;
+  background: #f2f2f7;
+  border-radius: 12px;
+  padding: 2px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: #8e8e93;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #ffffff;
+  color: #2563eb;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tab-content {
+  display: none;
+  padding-bottom: 90px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.doc-images-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.id-card-full {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  display: block;
+}
+
+.details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-label {
+  font-size: 13px;
+  color: #8e8e93;
+}
+
+.detail-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.bottom-actions {
+  position: fixed;
+  bottom: 24px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+
+.btn-primary {
+  flex: 1;
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  height: 52px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-more {
+  width: 52px;
+  height: 52px;
+  background: #f2f2f7;
+  border: none;
+  border-radius: 16px;
+  font-size: 18px;
+  color: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-send-details {
+  width: 100%;
+  background: #edf3ff;
+  color: #2563eb;
+  border: none;
+  border-radius: 16px;
+  height: 52px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
