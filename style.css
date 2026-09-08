@@ -388,11 +388,11 @@ html, body {
 }
 .docs-row::-webkit-scrollbar { display: none; }
 
-/* Кнопка "Все >" точно как в оригинале */
+/* Кнопка "Все >" */
 .all-docs-btn {
   background: #f2f2f7;
   border-radius: 18px;
-  padding: 10px 16px;
+  padding: 10px 18px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -403,17 +403,16 @@ html, body {
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
-  align-self: center;
 }
 
-/* Карточка документа под оригинал */
-.doc-card-item {
-  background: #eef3fe;
+/* Карточка документа */
+.doc-card {
+  background: #eef3fe; /* Светло-голубой фон как в оригинале */
   border-radius: 20px;
-  padding: 10px;
-  width: 140px;
-  min-width: 140px;
-  height: 105px;
+  padding: 12px;
+  width: 142px;
+  min-width: 142px;
+  height: 110px;
   text-decoration: none;
   display: flex;
   flex-direction: column;
@@ -422,32 +421,22 @@ html, body {
   flex-shrink: 0;
 }
 
-/* Область под картинку с обрезкой нижнего текста с самого изображения */
-.doc-preview {
-  height: 52px;
+/* Фото-превью из вашего файла без лишних обрезок */
+.doc-card-img {
   width: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 8px;
-}
-
-.doc-preview-img {
-  width: 100% !important;
-  height: auto !important;
-  object-fit: cover !important;
-  object-position: top !important; /* Показывает только верх с гербом, отсекая текст на самом фото */
+  height: auto;
+  max-height: 52px;
+  object-fit: contain;
   display: block;
 }
 
-/* Подпись к документу */
+/* Текст под миниатюрой */
 .doc-title { 
   font-size: 13px; 
   font-weight: 600; 
   line-height: 1.2; 
   color: #1c1c1e;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 .services-grid {
