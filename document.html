@@ -10,10 +10,10 @@
   <title>Удостоверение личности</title>
 </head>
 
-<body>
-  <div class="container">
-
-    <!-- Верхняя панель -->
+<body class="doc-page">
+  
+  <!-- Зафиксированная верхняя плашка (Шапка + Вкладки) -->
+  <header class="fixed-top-bar">
     <div class="header-nav">
       <a href="index.html" class="back-btn" aria-label="Назад">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -23,22 +23,24 @@
       <h1 class="title">Удостоверение личности</h1>
     </div>
 
-    <!-- Вкладки -->
     <div class="tabs">
       <div class="tab active" id="tabDoc">Документ</div>
       <div class="tab" id="tabReq">Реквизиты</div>
     </div>
+  </header>
 
-    <!-- Секция документа -->
-    <div id="documentSection">
-      <div class="zoom-wrapper">
+  <!-- Основная область просмотра -->
+  <main class="main-content">
+    
+    <!-- Секция документа с незамкнутым Zoom-слоем -->
+    <div id="documentSection" class="doc-section-active">
+      <div class="zoom-viewport" id="zoomViewport">
         <img src="my-id.jpg" class="document-image" id="zoomImage" alt="Удостоверение">
       </div>
-      <div class="primary-btn" id="openAccessBtn">Открыть доступ</div>
     </div>
 
     <!-- Секция реквизитов -->
-    <div id="requisitesSection" class="hidden">
+    <div id="requisitesSection" class="requisites-container hidden">
       <div class="info-item">
         <div class="label">ФИО</div>
         <div class="value">Зәрубаев Серікболсын Асхатұлы</div>
@@ -78,11 +80,15 @@
         <div class="label">Национальность</div>
         <div class="value">ҚАЗАҚ</div>
       </div>
-
-      <div class="primary-btn" id="shareBtn">Отправить реквизиты</div>
     </div>
 
-  </div>
+  </main>
+
+  <!-- Зафиксированная нижняя панель с кнопкой -->
+  <footer class="fixed-bottom-bar">
+    <div class="primary-btn" id="openAccessBtn">Открыть доступ</div>
+    <div class="primary-btn hidden" id="shareBtn">Отправить реквизиты</div>
+  </footer>
 
   <!-- Модальное окно QR -->
   <div id="qrModal" class="qr-modal hidden">
@@ -96,8 +102,9 @@
   </div>
 
   <script>
+    // Блокировка стандартного скролла iOS при жестах над Zoom-зоной
     document.addEventListener("touchmove", function(e) {
-      if (!e.target.closest("#zoomImage")) {
+      if (e.target.closest("#zoomViewport")) {
         e.preventDefault();
       }
     }, { passive: false });
