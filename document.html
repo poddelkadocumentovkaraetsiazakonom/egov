@@ -2,117 +2,112 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="app-icon.png">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <title>Удостоверение личности</title>
 </head>
+<body class="doc-body">
 
-<body class="doc-page">
-  
-  <!-- Зафиксированная верхняя плашка (Шапка + Вкладки) -->
-  <header class="fixed-top-bar">
+  <!-- Фиксированная верхняя панель -->
+  <div class="top-bar">
     <div class="header-nav">
-      <a href="index.html" class="back-btn" aria-label="Назад">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M15 18l-6-6 6-6"/>
+      <a href="index.html" class="icon-btn" aria-label="Закрыть">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </a>
       <h1 class="title">Удостоверение личности</h1>
+      <button class="icon-btn" aria-label="Поделиться">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+          <polyline points="16 6 12 2 8 6"></polyline>
+          <line x1="12" y1="2" x2="12" y2="15"></line>
+        </svg>
+      </button>
     </div>
 
+    <!-- Переключатель Вкладок -->
     <div class="tabs">
       <div class="tab active" id="tabDoc">Документ</div>
       <div class="tab" id="tabReq">Реквизиты</div>
     </div>
-  </header>
+  </div>
 
-  <!-- Основная область просмотра -->
-  <main class="main-content">
-    
-    <!-- Секция документа с незамкнутым Zoom-слоем -->
-    <div id="documentSection" class="doc-section-active">
-      <div class="zoom-viewport" id="zoomViewport">
-        <img src="my-id.jpg" class="document-image" id="zoomImage" alt="Удостоверение">
+  <!-- Рабочая область просмотра документа -->
+  <div class="content-viewport">
+    <div id="documentSection" class="doc-section">
+      <div class="zoom-container" id="zoomContainer">
+        <img src="my-id.jpg" id="zoomImage" class="document-card" alt="Удостоверение">
       </div>
     </div>
 
     <!-- Секция реквизитов -->
-    <div id="requisitesSection" class="requisites-container hidden">
+    <div id="requisitesSection" class="requisites-section hidden">
       <div class="info-item">
         <div class="label">ФИО</div>
         <div class="value">Зәрубаев Серікболсын Асхатұлы</div>
       </div>
-
       <div class="info-item">
         <div class="label">ИИН</div>
         <div class="value">031103551653</div>
       </div>
-
       <div class="info-item">
         <div class="label">Дата рождения</div>
         <div class="value">03.11.2003</div>
       </div>
-
       <div class="info-item">
         <div class="label">Номер документа</div>
         <div class="value">059261764</div>
       </div>
-
       <div class="info-item">
         <div class="label">Дата выдачи</div>
         <div class="value">30.10.2024</div>
       </div>
-
       <div class="info-item">
-        <div class="label">Срок выдачи</div>
+        <div class="label">Срок действия</div>
         <div class="value">29.10.2034</div>
       </div>
-
       <div class="info-item">
         <div class="label">Орган выдачи</div>
         <div class="value">ҚР ІШКІ ІСТЕР МИНИСТРЛІГІ</div>
       </div>
-
       <div class="info-item">
         <div class="label">Национальность</div>
         <div class="value">ҚАЗАҚ</div>
       </div>
     </div>
+  </div>
 
-  </main>
+  <!-- Фиксированная нижняя панель -->
+  <div class="bottom-bar">
+    <div class="action-btn-group">
+      <button class="primary-btn" id="openAccessBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+          <path d="M7 7h3v3H7zM14 7h3v3h-3zM7 14h3v3H7zM14 14h3v3h-3z"></path>
+        </svg>
+        <span>Открыть доступ</span>
+      </button>
+      <button class="more-btn" aria-label="Опции">
+        <span>•••</span>
+      </button>
+    </div>
+  </div>
 
-  <!-- Зафиксированная нижняя панель с кнопкой -->
-  <footer class="fixed-bottom-bar">
-    <div class="primary-btn" id="openAccessBtn">Открыть доступ</div>
-    <div class="primary-btn hidden" id="shareBtn">Отправить реквизиты</div>
-  </footer>
-
-  <!-- Модальное окно QR -->
+  <!-- QR Модалка -->
   <div id="qrModal" class="qr-modal hidden">
     <div class="qr-sheet">
-      <div class="drag-line"></div>
+      <div class="drag-handle"></div>
       <h2>Доступ к документу</h2>
       <div id="qrcode"></div>
       <div id="timer" class="timer"></div>
       <div id="shortCode" class="short-code"></div>
     </div>
   </div>
-
-  <script>
-    // Блокировка стандартного скролла iOS при жестах над Zoom-зоной
-    document.addEventListener("touchmove", function(e) {
-      if (e.target.closest("#zoomViewport")) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-
-    document.addEventListener("gesturestart", e => e.preventDefault());
-    document.addEventListener("gesturechange", e => e.preventDefault());
-    document.addEventListener("gestureend", e => e.preventDefault());
-  </script>
 
   <script src="app.js"></script>
 </body>
