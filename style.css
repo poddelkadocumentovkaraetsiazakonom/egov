@@ -392,7 +392,7 @@ html, body {
 .all-docs-btn {
   background: #f2f2f7;
   border-radius: 18px;
-  padding: 10px 18px;
+  padding: 10px 16px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -405,31 +405,30 @@ html, body {
   flex-shrink: 0;
 }
 
-/* Карточка документа */
+/* Голубая карточка-контейнер */
 .doc-card {
-  background: #eef3fe; /* Светло-голубой фон как в оригинале */
+  background: #eef3fe;
   border-radius: 20px;
-  padding: 12px;
-  width: 142px;
-  min-width: 142px;
-  height: 110px;
+  padding: 8px;
+  width: 140px;
+  min-width: 140px;
+  height: 105px;
   text-decoration: none;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
-/* Фото-превью из вашего файла без лишних обрезок */
+/* Картинка заполнит всю внутреннюю область */
 .doc-card-img {
   width: 100%;
-  height: auto;
-  max-height: 52px;
+  height: 100%;
   object-fit: contain;
   display: block;
 }
-
 /* Текст под миниатюрой */
 .doc-title { 
   font-size: 13px; 
