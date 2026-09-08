@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const openBtn = document.getElementById("openAccessBtn");
   const shareBtn = document.getElementById("shareBtn");
 
-  // === Tabs ===
+ // === Tabs ===
   if (tabDoc && tabReq) {
     tabDoc.addEventListener("click", function() {
       documentSection.classList.remove("hidden");
