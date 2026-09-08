@@ -10,7 +10,7 @@
 <body class="doc-body">
 
   <div class="sheet-container">
-    <!-- Шапка модального окна -->
+    <!-- Шапка -->
     <div class="sheet-header">
       <a href="index.html" class="close-btn">✕</a>
       <div class="sheet-title">Удостоверение личности</div>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <!-- Табы Документ / Реквизиты -->
+    <!-- Вкладки -->
     <div class="tab-control-wrapper">
       <div class="tab-control">
         <div class="tab-item active" id="tabDoc">Документ</div>
@@ -31,28 +31,31 @@
       </div>
     </div>
 
-    <!-- Секция с документом -->
-    <div id="documentSection" class="doc-content">
-      <div class="doc-card-frame" id="zoomContainer">
-        <img src="my-id.jpg" class="id-card-full-img" id="zoomImage" alt="Удостоверение личности">
+    <!-- Область контента -->
+    <div class="doc-content">
+      <!-- Секция документа -->
+      <div id="documentSection" class="tab-pane">
+        <div class="doc-card-frame" id="zoomContainer">
+          <img src="my-id.jpg" class="id-card-full-img" id="zoomImage" alt="Удостоверение личности">
+        </div>
+      </div>
+
+      <!-- Секция реквизитов (скрыта по умолчанию) -->
+      <div id="requisitesSection" class="tab-pane hidden">
+        <div class="requisites-list">
+          <div class="info-item"><div class="label">ФИО</div><div class="value">Зәрубаев Серікболсын Асхатұлы</div></div>
+          <div class="info-item"><div class="label">ИИН</div><div class="value">031103551653</div></div>
+          <div class="info-item"><div class="label">Дата рождения</div><div class="value">03.11.2003</div></div>
+          <div class="info-item"><div class="label">Номер документа</div><div class="value">059261764</div></div>
+          <div class="info-item"><div class="label">Дата выдачи</div><div class="value">30.10.2024</div></div>
+          <div class="info-item"><div class="label">Срок действия</div><div class="value">29.10.2034</div></div>
+          <div class="info-item"><div class="label">Орган выдачи</div><div class="value">ҚР ІШКІ ІСТЕР МИНИСТРЛІГІ</div></div>
+          <div class="info-item"><div class="label">Национальность</div><div class="value">ҚАЗАҚ</div></div>
+        </div>
       </div>
     </div>
 
-    <!-- Секция с реквизитами -->
-    <div id="requisitesSection" class="doc-content hidden">
-      <div class="requisites-list">
-        <div class="info-item"><div class="label">ФИО</div><div class="value">Зәрубаев Серікболсын Асхатұлы</div></div>
-        <div class="info-item"><div class="label">ИИН</div><div class="value">031103551653</div></div>
-        <div class="info-item"><div class="label">Дата рождения</div><div class="value">03.11.2003</div></div>
-        <div class="info-item"><div class="label">Номер документа</div><div class="value">059261764</div></div>
-        <div class="info-item"><div class="label">Дата выдачи</div><div class="value">30.10.2024</div></div>
-        <div class="info-item"><div class="label">Срок действия</div><div class="value">29.10.2034</div></div>
-        <div class="info-item"><div class="label">Орган выдачи</div><div class="value">ҚР ІШКІ ІСТЕР МИНИСТРЛІГІ</div></div>
-        <div class="info-item"><div class="label">Национальность</div><div class="value">ҚАЗАҚ</div></div>
-      </div>
-    </div>
-
-    <!-- Нижняя плашка с кнопками -->
+    <!-- Нижняя панель -->
     <div class="doc-bottom-bar">
       <button class="access-btn" id="openAccessBtn">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
@@ -65,7 +68,7 @@
     </div>
   </div>
 
-  <!-- Модальное окно QR -->
+  <!-- QR Модалка -->
   <div id="qrModal" class="qr-modal hidden">
     <div class="qr-sheet">
       <div class="drag-line"></div>
