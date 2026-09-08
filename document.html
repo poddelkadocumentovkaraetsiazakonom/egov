@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="app-icon.png">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <title>Удостоверение личности</title>
 </head>
 
 <body>
   <div class="container">
 
-    <!-- Верхняя панель перенесена в body -->
+    <!-- Верхняя панель -->
     <div class="header-nav">
       <a href="index.html" class="back-btn" aria-label="Назад">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -20,6 +23,7 @@
       <h1 class="title">Удостоверение личности</h1>
     </div>
 
+    <!-- Вкладки -->
     <div class="tabs">
       <div class="tab active" id="tabDoc">Документ</div>
       <div class="tab" id="tabReq">Реквизиты</div>
@@ -90,6 +94,18 @@
       <div id="shortCode" class="short-code"></div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("touchmove", function(e) {
+      if (!e.target.closest("#zoomImage")) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    document.addEventListener("gesturestart", e => e.preventDefault());
+    document.addEventListener("gesturechange", e => e.preventDefault());
+    document.addEventListener("gestureend", e => e.preventDefault());
+  </script>
 
   <script src="app.js"></script>
 </body>
