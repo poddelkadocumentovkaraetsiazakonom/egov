@@ -382,55 +382,67 @@ html, body {
 .docs-row { 
   display: flex; 
   align-items: center;
-  gap: 8px; 
+  gap: 12px; 
   overflow-x: auto;
   scrollbar-width: none;
+  padding: 4px 0;
 }
 .docs-row::-webkit-scrollbar { display: none; }
 
 /* Кнопка "Все >" */
 .all-docs-btn {
   background: #f2f2f7;
-  border-radius: 12px;
-  padding: 0 14px;
-  height: 40px;
+  border-radius: 20px;
+  width: 80px;
+  height: 98px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-size: 13px;
+  font-size: 14px;
   color: #000;
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-/* Ссылка-обертка */
+/* Ссылка-обертка для карточки документа (плашка) */
 .doc-card-link {
   display: flex;
-  align-items: center;
-  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 120px;
+  height: 98px;
+  background-color: #eef4ff;
+  border-radius: 20px;
+  padding: 8px 8px 10px 10px;
+  box-sizing: border-box;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
-/* Картинка зажата строго под высоту 40px, как в оригинале */
+/* Миниатюра документа */
 .pure-doc-img {
-  height: 40px !important;
-  width: auto !important;
-  max-width: 110px !important;
-  object-fit: contain;
+  width: 100% !important;
+  height: 48px !important;
+  max-width: none !important;
+  object-fit: cover !important;
   display: block;
-  border-radius: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
+
 /* Текст под миниатюрой */
 .doc-title { 
-  font-size: 13px; 
-  font-weight: 600; 
-  line-height: 1.2; 
+  font-size: 11px; 
+  font-weight: 500; 
+  line-height: 1.25; 
   color: #1c1c1e;
   margin-top: 4px;
+  word-wrap: break-word;
 }
 
+/* Раздел «Сервисы» */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -467,6 +479,7 @@ html, body {
 .enbek-e { color: #fb8c00; font-weight: 800; font-size: 26px; }
 .s-title { font-size: 11px; color: #3a3a3c; line-height: 1.2; }
 
+/* Нижнее меню */
 .bottom-nav {
   position: fixed;
   bottom: 0;
