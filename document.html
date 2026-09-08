@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no, maximum-scale=1">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-  <!-- Верхняя панель с кнопкой "Назад" -->
-<div class="header-nav">
-  <a href="index.html" class="back-btn" aria-label="Назад">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M15 18l-6-6 6-6"/>
-    </svg>
-  </a>
-  <h1 class="title">Удостоверение личности</h1>
-</div>
 </head>
 
 <body>
   <div class="container">
 
+    <!-- Верхняя панель перенесена в body -->
+    <div class="header-nav">
+      <a href="index.html" class="back-btn" aria-label="Назад">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </a>
+      <h1 class="title">Удостоверение личности</h1>
+    </div>
 
     <div class="tabs">
       <div class="tab active" id="tabDoc">Документ</div>
@@ -75,15 +75,12 @@
         <div class="value">ҚАЗАҚ</div>
       </div>
 
-      
-      </div>
-
       <div class="primary-btn" id="shareBtn">Отправить реквизиты</div>
     </div>
 
   </div>
 
-  <!-- Модальное окно с QR-кодом -->
+  <!-- Модальное окно QR -->
   <div id="qrModal" class="qr-modal hidden">
     <div class="qr-sheet">
       <div class="drag-line"></div>
@@ -93,18 +90,6 @@
       <div id="shortCode" class="short-code"></div>
     </div>
   </div>
-
-  <script>
-    document.addEventListener("touchmove", function(e) {
-      if (!e.target.closest("#zoomImage")) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-
-    document.addEventListener("gesturestart", e => e.preventDefault());
-    document.addEventListener("gesturechange", e => e.preventDefault());
-    document.addEventListener("gestureend", e => e.preventDefault());
-  </script>
 
   <script src="app.js"></script>
 </body>
