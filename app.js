@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const openBtn = document.getElementById("openAccessBtn");
   const shareBtn = document.getElementById("shareBtn");
 
- // === Tabs ===
+  // === Tabs ===
   if (tabDoc && tabReq) {
     tabDoc.addEventListener("click", function() {
       documentSection.classList.remove("hidden");
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
- // === Swipe down QR modal ===
+  // === Swipe down QR modal ===
   const qrModal = document.getElementById("qrModal");
   const qrSheet = qrModal ? qrModal.querySelector(".qr-sheet") : null;
 
@@ -184,13 +184,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-
 // =========================
 // === QR FUNCTIONS ========
 // =========================
 
 function showQR() {
   const modal = document.getElementById("qrModal");
+  const sheet = modal.querySelector(".qr-sheet");
+  
+  if (sheet) sheet.style.transform = "translateY(0)";
   modal.classList.remove("hidden");
 
   if (qrInterval) clearInterval(qrInterval);
