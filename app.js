@@ -7,15 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
   const documentSection = document.getElementById("documentSection");
   const requisitesSection = document.getElementById("requisitesSection");
   const openBtn = document.getElementById("openAccessBtn");
-  const shareBtn = document.getElementById("shareBtn");
 
-  // === Переключение вкладок ===
+  // === Вкладки ===
   if (tabDoc && tabReq) {
     tabDoc.addEventListener("click", function() {
       documentSection.classList.remove("hidden");
       requisitesSection.classList.add("hidden");
-      openBtn.classList.remove("hidden");
-      shareBtn.classList.add("hidden");
       tabDoc.classList.add("active");
       tabReq.classList.remove("active");
     });
@@ -23,8 +20,6 @@ document.addEventListener("DOMContentLoaded", function() {
     tabReq.addEventListener("click", function() {
       documentSection.classList.add("hidden");
       requisitesSection.classList.remove("hidden");
-      openBtn.classList.add("hidden");
-      shareBtn.classList.remove("hidden");
       tabReq.classList.add("active");
       tabDoc.classList.remove("active");
     });
@@ -35,17 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
     openBtn.addEventListener("click", showQR);
   }
 
-  // === Поделиться реквизитами ===
-  if (shareBtn) {
-    shareBtn.addEventListener("click", async function() {
-      const text = `ФИО: Зәрубаев Серікболсын Асхатұлы\nИИН: 031103551653\nДата рождения: 03.11.2003\nНомер документа: 059261764`;
-      if (navigator.share) {
-        await navigator.share({ title: "Реквизиты", text });
-      }
-    });
-  }
-
-  // === Закрытие QR свайпом вниз ===
+  // === Свайп вниз для закрытия шторки ===
   const qrModal = document.getElementById("qrModal");
   const qrSheet = qrModal ? qrModal.querySelector(".qr-sheet") : null;
 
@@ -58,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
       startY = e.touches[0].clientY;
       isDragging = true;
       qrSheet.style.transition = "none";
-    });
+    }, { passive: true });
 
     qrSheet.addEventListener("touchmove", (e) => {
       if (!isDragging) return;
@@ -67,40 +52,36 @@ document.addEventListener("DOMContentLoaded", function() {
       if (diff > 0) {
         qrSheet.style.transform = `translateY(${diff}px)`;
       }
-    });
+    }, { passive: true });
 
     qrSheet.addEventListener("touchend", () => {
       if (!isDragging) return;
       let diff = currentY - startY;
-      qrSheet.style.transition = "transform 0.2s ease";
-      if (diff > 120) {
+      qrSheet.style.transition = "transform 0.25s cubic-bezier(0.1, 0.8, 0.1, 1)";
+      if (diff > 100) {
         closeQR();
       } else {
         qrSheet.style.transform = "translateY(0)";
       }
       isDragging = false;
-      startY = 0;
-      currentY = 0;
     });
   }
 
-  // ===================================
-  // === ИСПРАВЛЕННЫЙ PINCH & PAN ZOOM ===
-  // ===================================
+  // ==========================================
+  // === PINCH & PAN ZOOM ДЛЯ КАРТОЧКИ ===
+  // ==========================================
 
   const img = document.getElementById("zoomImage");
-  const viewport = document.getElementById("zoomViewport");
+  const container = document.getElementById("zoomContainer");
 
-  if (img && viewport) {
+  if (img && container) {
     let scale = 1;
     let lastScale = 1;
     let startDistance = 0;
-
     let translateX = 0;
     let translateY = 0;
     let startX = 0;
     let startY = 0;
-
     let lastTap = 0;
 
     function getDistance(touches) {
@@ -110,6 +91,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateTransform() {
+      if (scale > 1) {
+        img.style.borderRadius = "0px"; // При увеличении закругление уходит за границы
+      } else {
+        img.style.borderRadius = "16px";
+      }
       img.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
     }
 
@@ -120,9 +106,9 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
       }
 
-      const rect = viewport.getBoundingClientRect();
+      const rect = container.getBoundingClientRect();
       const imgWidth = rect.width * scale;
-      const imgHeight = (img.offsetHeight || rect.height) * scale;
+      const imgHeight = (img.offsetHeight || 250) * scale;
 
       const maxX = Math.max(0, (imgWidth - rect.width) / 2);
       const maxY = Math.max(0, (imgHeight - rect.height) / 2);
@@ -131,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
       translateY = Math.max(-maxY, Math.min(maxY, translateY));
     }
 
-    // Двойной таб для Zoom In / Zoom Out
+    // Двойной таб
     img.addEventListener("touchstart", (e) => {
       const now = Date.now();
       if (e.touches.length === 1 && now - lastTap < 300) {
@@ -140,9 +126,9 @@ document.addEventListener("DOMContentLoaded", function() {
           translateX = 0;
           translateY = 0;
         } else {
-          scale = 2.2;
+          scale = 2.4;
         }
-        img.style.transition = "transform 0.25s cubic-bezier(0.1, 0.5, 0.1, 1)";
+        img.style.transition = "transform 0.25s ease-out, border-radius 0.25s ease-out";
         updateTransform();
         setTimeout(() => { img.style.transition = "none"; }, 250);
       }
@@ -162,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function() {
         e.preventDefault();
         const newDistance = getDistance(e.touches);
         scale = lastScale * (newDistance / startDistance);
-        scale = Math.max(1, Math.min(scale, 4.5));
+        scale = Math.max(1, Math.min(scale, 4));
         limitBounds();
         updateTransform();
       } else if (e.touches.length === 1 && scale > 1) {
@@ -174,12 +160,12 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }, { passive: false });
 
-    img.addEventListener("touchend", (e) => {
+    img.addEventListener("touchend", () => {
       if (scale < 1) {
         scale = 1;
         translateX = 0;
         translateY = 0;
-        img.style.transition = "transform 0.2s ease";
+        img.style.transition = "transform 0.2s ease, border-radius 0.2s ease";
         updateTransform();
         setTimeout(() => { img.style.transition = "none"; }, 200);
       } else {
@@ -191,36 +177,38 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-// === QR-функции ===
+// === QR Функции ===
 function showQR() {
   const modal = document.getElementById("qrModal");
-  const sheet = modal.querySelector(".qr-sheet");
+  const sheet = modal ? modal.querySelector(".qr-sheet") : null;
   
   if (sheet) sheet.style.transform = "translateY(0)";
-  modal.classList.remove("hidden");
+  if (modal) modal.classList.remove("hidden");
 
   if (qrInterval) clearInterval(qrInterval);
 
   const randomCode = Math.floor(100000 + Math.random() * 900000);
-  document.getElementById("shortCode").innerText = randomCode;
+  const codeEl = document.getElementById("shortCode");
+  if (codeEl) codeEl.innerText = randomCode;
 
   const qrContainer = document.getElementById("qrcode");
-  qrContainer.innerHTML = "";
-
-  new QRCode(qrContainer, {
-    text: randomCode.toString(),
-    width: 220,
-    height: 220
-  });
+  if (qrContainer) {
+    qrContainer.innerHTML = "";
+    new QRCode(qrContainer, {
+      text: randomCode.toString(),
+      width: 200,
+      height: 200
+    });
+  }
 
   let time = 60;
   const timerEl = document.getElementById("timer");
-  timerEl.innerText = "Срок действия: 01:00";
+  if (timerEl) timerEl.innerText = "Срок действия: 01:00";
 
   qrInterval = setInterval(() => {
     time--;
     let seconds = time < 10 ? "0" + time : time;
-    timerEl.innerText = "Срок действия: 00:" + seconds;
+    if (timerEl) timerEl.innerText = "Срок действия: 00:" + seconds;
     if (time <= 0) closeQR();
   }, 1000);
 }
@@ -228,5 +216,5 @@ function showQR() {
 function closeQR() {
   const modal = document.getElementById("qrModal");
   if (qrInterval) clearInterval(qrInterval);
-  modal.classList.add("hidden");
+  if (modal) modal.classList.add("hidden");
 }
