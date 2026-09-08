@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
   <title>Удостоверение личности</title>
 </head>
 <body class="doc-body">
@@ -13,7 +14,7 @@
     <div class="sheet-header">
       <a href="index.html" class="close-btn">✕</a>
       <div class="sheet-title">Удостоверение личности</div>
-      <div class="share-btn">
+      <div class="share-btn" id="shareBtn">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2">
           <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
           <polyline points="16 6 12 2 8 6"/>
@@ -25,21 +26,35 @@
     <!-- Табы Документ / Реквизиты -->
     <div class="tab-control-wrapper">
       <div class="tab-control">
-        <div class="tab-item active">Документ</div>
-        <div class="tab-item">Реквизиты</div>
+        <div class="tab-item active" id="tabDoc">Документ</div>
+        <div class="tab-item" id="tabReq">Реквизиты</div>
       </div>
     </div>
 
-    <!-- Область с изображением удостоверения -->
-    <div class="doc-content">
-      <div class="doc-card-frame">
-        <img src="id-card.png" class="id-card-full-img" alt="Удостоверение личности">
+    <!-- Секция с документом -->
+    <div id="documentSection" class="doc-content">
+      <div class="doc-card-frame" id="zoomContainer">
+        <img src="my-id.jpg" class="id-card-full-img" id="zoomImage" alt="Удостоверение личности">
+      </div>
+    </div>
+
+    <!-- Секция с реквизитами -->
+    <div id="requisitesSection" class="doc-content hidden">
+      <div class="requisites-list">
+        <div class="info-item"><div class="label">ФИО</div><div class="value">Зәрубаев Серікболсын Асхатұлы</div></div>
+        <div class="info-item"><div class="label">ИИН</div><div class="value">031103551653</div></div>
+        <div class="info-item"><div class="label">Дата рождения</div><div class="value">03.11.2003</div></div>
+        <div class="info-item"><div class="label">Номер документа</div><div class="value">059261764</div></div>
+        <div class="info-item"><div class="label">Дата выдачи</div><div class="value">30.10.2024</div></div>
+        <div class="info-item"><div class="label">Срок действия</div><div class="value">29.10.2034</div></div>
+        <div class="info-item"><div class="label">Орган выдачи</div><div class="value">ҚР ІШКІ ІСТЕР МИНИСТРЛІГІ</div></div>
+        <div class="info-item"><div class="label">Национальность</div><div class="value">ҚАЗАҚ</div></div>
       </div>
     </div>
 
     <!-- Нижняя плашка с кнопками -->
     <div class="doc-bottom-bar">
-      <button class="access-btn">
+      <button class="access-btn" id="openAccessBtn">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
           <rect x="3" y="3" width="18" height="18" rx="2"/>
           <path d="M7 7h3v3H7zM14 7h3v3h-3zM7 14h3v3H7z"/>
@@ -50,5 +65,17 @@
     </div>
   </div>
 
+  <!-- Модальное окно QR -->
+  <div id="qrModal" class="qr-modal hidden">
+    <div class="qr-sheet">
+      <div class="drag-line"></div>
+      <h2>Доступ к документу</h2>
+      <div id="qrcode"></div>
+      <div id="timer" class="timer"></div>
+      <div id="shortCode" class="short-code"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
