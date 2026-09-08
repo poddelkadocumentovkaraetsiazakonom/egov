@@ -337,3 +337,10 @@ body {
 .nav-item.active {
   color: #007aff;
 }
+
+/* --- ФИКС ДЛЯ СТРАНИЦЫ DOCUMENT.HTML --- */
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
