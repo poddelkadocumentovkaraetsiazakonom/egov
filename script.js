@@ -1,4 +1,3 @@
-// Переключение вкладок
 function switchTab(tabName) {
   const tabDoc = document.getElementById('tab-doc');
   const tabDetails = document.getElementById('tab-details');
@@ -11,16 +10,15 @@ function switchTab(tabName) {
     tabDoc.classList.add('active');
     tabDetails.classList.remove('active');
     tabBtns[0].classList.add('active');
-    topShareBtn.style.display = 'flex'; // Показываем верхнюю иконку
+    topShareBtn.style.display = 'flex';
   } else {
     tabDoc.classList.remove('active');
     tabDetails.classList.add('active');
     tabBtns[1].classList.add('active');
-    topShareBtn.style.display = 'none'; // Скрываем верхнюю иконку
+    topShareBtn.style.display = 'none';
   }
 }
 
-// Вызов стандартного окна «Поделиться» на iPhone
 document.getElementById('share-details-btn').addEventListener('click', async () => {
   const textToShare = 
 `Удостоверение личности
@@ -41,7 +39,7 @@ document.getElementById('share-details-btn').addEventListener('click', async () 
         text: textToShare
       });
     } catch (err) {
-      console.log('Отмена или ошибка:', err);
+      console.log('Отмена:', err);
     }
   } else {
     navigator.clipboard.writeText(textToShare);
