@@ -382,7 +382,7 @@ html, body {
 .docs-row { 
   display: flex; 
   align-items: center;
-  gap: 12px; 
+  gap: 8px; 
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -391,33 +391,36 @@ html, body {
 /* Кнопка "Все >" */
 .all-docs-btn {
   background: #f2f2f7;
-  border-radius: 18px;
-  padding: 10px 18px;
+  border-radius: 12px;
+  padding: 0 14px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   color: #000;
   text-decoration: none;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-/* Ссылка-обертка без стилей */
+/* Ссылка-обертка */
 .doc-card-link {
-  display: block;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
   text-decoration: none;
 }
 
-/* Только твоя картинка id-card.png в родном размере */
+/* Картинка зажата строго под высоту 40px, как в оригинале */
 .pure-doc-img {
-  width: 142px;
-  height: auto;
+  height: 40px !important;
+  width: auto !important;
+  max-width: 110px !important;
+  object-fit: contain;
   display: block;
-  border-radius: 20px;
+  border-radius: 12px;
 }
 /* Текст под миниатюрой */
 .doc-title { 
