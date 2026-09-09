@@ -465,7 +465,7 @@ html, body {
 }
 
 /* ========================================= */
-/* === РАЗДЕЛ «СЕРВИСЫ» (ИСПРАВЛЕННЫЙ) ===== */
+/* === РАЗДЕЛ «СЕРВИСЫ» (АВТО-КРОП ПОЛЕЙ) === */
 /* ========================================= */
 
 .services-grid {
@@ -482,46 +482,50 @@ html, body {
   text-align: center;
 }
 
-/* Квадратная плашка-контейнер */
+/* Контейнер-маска (жестко обрезает всё, что выходит за рамки) */
 .s-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 16px;
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 6px;
-  overflow: hidden;
+  overflow: hidden !important;
   position: relative;
   background: #ffffff;
-  border: 1px solid #f0f0f3;
+  border: 1px solid #eef0f4;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* Первая синяя иконка (eGov Госуслуги) без белой рамки */
+/* Первая плашка (eGov) */
 .main-egov-icon {
   border: none;
   box-shadow: none;
   background: transparent;
 }
 
-/* Картинка первой плашки eGov (растягивается полностью) */
+/* Первая иконка eGov */
 .icon-img-full {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 16px;
+  border-radius: 18px;
   display: block;
 }
 
-/* Все остальные иконки сервисов:
-   contain пропорционально уменьшает картинку, чтобы она полностью помещалась внутри */
-.icon-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Картинка полностью влезает без обрезки */
-  padding: 6px;        /* Внутренний отступ, чтобы иконка не липла к краям плашки */
-  transform: none;     /* Убираем любой scale, из-за которого она вылезала */
+/* Для всех остальных иконок с лишними полями:
+   Увеличиваем файл и центрируем, чтобы вытолкнуть пустые края за пределы блока */
+.icon-img, 
+.icon-img-fit, 
+.icon-img-crop {
+  width: 170% !important;
+  height: 170% !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  flex-shrink: 0;
   display: block;
 }
 
