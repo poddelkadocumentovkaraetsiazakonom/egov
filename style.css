@@ -463,7 +463,11 @@ html, body {
   padding: 0 10px;
   letter-spacing: -0.2px;
 }
-/* Раздел «Сервисы» */
+
+/* ========================================= */
+/* === РАЗДЕЛ «СЕРВИСЫ» (ОБНОВЛЕННЫЙ) === */
+/* ========================================= */
+
 .services-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -471,7 +475,12 @@ html, body {
   margin-bottom: 28px;
 }
 
-.service-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 
 .s-icon {
   width: 60px;
@@ -481,24 +490,45 @@ html, body {
   align-items: center;
   justify-content: center;
   margin-bottom: 6px;
+  overflow: hidden;
 }
 
-.blue-egov { background: #2f6df6; color: #fff; flex-direction: column; border-radius: 18px; }
-.egov-text { font-size: 16px; font-weight: 800; line-height: 1; }
-.egov-sub { font-size: 9px; margin-top: 3px; opacity: 0.9; }
+/* Первая синяя главная плитка eGov Госуслуги */
+.main-egov-icon {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
 
-.icon-circle { background: #fff; border: 1px solid #e5e5ea; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-.e-otinish-logo { color: #2f6df6; font-size: 28px; font-weight: 700; }
+/* Белая кругленькая/скругленная рамка под иконки */
+.icon-circle {
+  background: #ffffff;
+  border: 1px solid #e5e5ea;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
 
-.dots-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 16px; }
-.dot { width: 8px; height: 8px; border-radius: 50%; }
-.dot.red { background: #e53935; }
-.dot.blue { background: #1e88e5; }
+/* Изображение синей карточки eGov (растягивается на весь контейнер) */
+.icon-img-full {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+}
 
-.text-notary { color: #0d47a1; font-weight: 700; font-size: 16px; }
-.text-oqu { color: #0d47a1; font-weight: 800; font-size: 15px; }
-.enbek-e { color: #fb8c00; font-weight: 800; font-size: 26px; }
-.s-title { font-size: 11px; color: #3a3a3c; line-height: 1.2; }
+/* Вырезанные логотипы сервисов внутри белых блоков */
+.icon-img {
+  width: 72%;
+  height: 72%;
+  object-fit: contain;
+  display: block;
+}
+
+.s-title {
+  font-size: 11px;
+  color: #3a3a3c;
+  line-height: 1.2;
+}
 
 /* Нижнее меню */
 .bottom-nav {
