@@ -465,7 +465,7 @@ html, body {
 }
 
 /* ========================================= */
-/* === РАЗДЕЛ «СЕРВИСЫ» (ТОЧНЫЙ МАСШТАБ) === */
+/* === РАЗДЕЛ «СЕРВИСЫ» (ИСПРАВЛЕННЫЙ) ===== */
 /* ========================================= */
 
 .services-grid {
@@ -482,58 +482,46 @@ html, body {
   text-align: center;
 }
 
-/* Контейнер иконки — точный размер как в оригинальном интерфейсе iOS */
+/* Квадратная плашка-контейнер */
 .s-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 18px;
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 6px;
   overflow: hidden;
   position: relative;
-  background: transparent;
-}
-
-/* Синяя карточка eGov */
-.main-egov-icon {
-  background: none;
-  border: none;
-  box-shadow: none;
-}
-
-/* Белая подложка для остальных 7 иконок */
-.icon-circle {
   background: #ffffff;
-  border: 1px solid #eef0f4;
+  border: 1px solid #f0f0f3;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* Первая иконка (eGov Госуслуги) забирает всю площадь скругления */
+/* Первая синяя иконка (eGov Госуслуги) без белой рамки */
+.main-egov-icon {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* Картинка первой плашки eGov (растягивается полностью) */
 .icon-img-full {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 18px;
+  border-radius: 16px;
   display: block;
 }
 
-/* Для PNG-картинок, где вырезан ТОЛЬКО сам логотип (без встроенного текста под ним) */
+/* Все остальные иконки сервисов:
+   contain пропорционально уменьшает картинку, чтобы она полностью помещалась внутри */
 .icon-img {
-  width: 82%;
-  height: 82%;
-  object-fit: contain;
-  display: block;
-}
-
-/* Для PNG-картинок, где внутри у изображения остался запеченный текст:
-   автоматически масштабирует картинку, срезая внутренний текст и заполняя рамку */
-.icon-img-crop {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 18px;
+  object-fit: contain; /* Картинка полностью влезает без обрезки */
+  padding: 6px;        /* Внутренний отступ, чтобы иконка не липла к краям плашки */
+  transform: none;     /* Убираем любой scale, из-за которого она вылезала */
   display: block;
 }
 
@@ -543,7 +531,6 @@ html, body {
   color: #2c2c2e;
   line-height: 1.2;
 }
-
 /* Нижнее меню */
 .bottom-nav {
   position: fixed;
