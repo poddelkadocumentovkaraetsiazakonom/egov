@@ -465,75 +465,62 @@ html, body {
 }
 
 /* ========================================= */
-/* === РАЗДЕЛ «СЕРВИСЫ» (АВТО-КРОП ПОЛЕЙ) === */
+/* === РАЗДЕЛ «СЕРВИСЫ» (ФИНАЛЬНЫЙ ФИКС) === */
 /* ========================================= */
 
 .services-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px 8px;
+  gap: 12px 8px;
   margin-bottom: 28px;
 }
 
 .service-card {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
-/* Контейнер-маска (жестко обрезает всё, что выходит за рамки) */
+/* Фиксированная плашка 68x68 */
 .s-icon {
-  width: 62px;
-  height: 62px;
+  width: 68px;
+  height: 68px;
   border-radius: 18px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 6px;
-  overflow: hidden !important;
-  position: relative;
   background: #ffffff;
-  border: 1px solid #eef0f4;
+  border: 1px solid #f0f0f3;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* Первая плашка (eGov) */
+/* object-fit: contain сжимает всю картинку (вместе с текстом внутри) целиком в квадрат 68px */
+.icon-img, 
+.icon-img-crop, 
+.icon-img-fit,
+.service-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  transform: none !important;
+  padding: 2px;
+  display: block;
+}
+
+/* Первая плашка eGov без рамок */
 .main-egov-icon {
   border: none;
   box-shadow: none;
   background: transparent;
 }
 
-/* Первая иконка eGov */
 .icon-img-full {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 18px;
   display: block;
-}
-
-/* Для всех остальных иконок с лишними полями:
-   Увеличиваем файл и центрируем, чтобы вытолкнуть пустые края за пределы блока */
-.icon-img, 
-.icon-img-fit, 
-.icon-img-crop {
-  width: 170% !important;
-  height: 170% !important;
-  max-width: none !important;
-  max-height: none !important;
-  object-fit: cover !important;
-  object-position: center !important;
-  flex-shrink: 0;
-  display: block;
-}
-
-.s-title {
-  font-size: 11px;
-  font-weight: 500;
-  color: #2c2c2e;
-  line-height: 1.2;
 }
 /* Нижнее меню */
 .bottom-nav {
