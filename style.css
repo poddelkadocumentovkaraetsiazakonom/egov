@@ -8,7 +8,6 @@
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
   background-color: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
   color: #000000;
@@ -25,6 +24,7 @@ html, body {
   height: 100vh;
   height: -webkit-fill-available;
   position: relative;
+  overflow: hidden; /* Блокируем скролл только для страницы документа */
 }
 
 /* Шапка */
@@ -169,7 +169,6 @@ html, body {
   margin-bottom: 2px;
 }
 
-/* Полностью оригинальное бесшовное редактирование реквизитов */
 .value {
   font-size: 17px;
   font-weight: 600;
@@ -309,14 +308,18 @@ html, body {
 /* === СТИЛИ ГЛАВНОГО ЭКРАНА (index.html) === */
 /* ========================================= */
 
+.home-body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .home-container {
   padding: 12px 16px;
   max-width: 500px;
   margin: 0 auto;
-  overflow-y: auto;
-  height: calc(100vh - 65px);
-  padding-bottom: 80px;
-  -webkit-overflow-scrolling: touch;
+  min-height: 100vh;
+  /* Резервируем место снизу под фиксированный Bottom Nav с учетом Home Indicator на iOS */
+  padding-bottom: calc(85px + env(safe-area-inset-bottom));
 }
 
 .search-bar {
@@ -504,12 +507,15 @@ html, body {
 }
 
 .s-icon {
-  width: 68px;
-  height: 68px;
-  border-radius: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
   overflow: hidden;
   background: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .service-img {
@@ -517,6 +523,15 @@ html, body {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.service-label {
+  font-size: 11px;
+  color: #1c1c1e;
+  margin-top: 6px;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 /* ========================================= */
@@ -635,8 +650,10 @@ html, body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #ffffff;
-  border-top: 1px solid #e5e5ea;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 0.5px solid rgba(60, 60, 67, 0.18);
   display: flex;
   justify-content: space-around;
   padding-top: 8px;
