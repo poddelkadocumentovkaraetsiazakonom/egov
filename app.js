@@ -7,6 +7,84 @@ document.addEventListener("DOMContentLoaded", function() {
   const documentSection = document.getElementById("documentSection");
   const requisitesSection = document.getElementById("requisitesSection");
   const openBtn = document.getElementById("openAccessBtn");
+  const img = document.getElementById("zoomImage");
+  const imageInput = document.getElementById("imageInput");
+
+  // === 1. ЗАГРУЗКА СОХРАНЕННЫХ ДАННЫХ ИЗ LOCALSTORAGE ===
+  const savedImage = localStorage.getItem("custom_id_image");
+  if (savedImage && img) {
+    img.src = savedImage;
+  }
+
+  const reqFields = ["fio", "iin", "dob", "docnum", "issuedate", "expdate", "authority", "nationality"];
+  reqFields.forEach(field => {
+    const savedVal = localStorage.getItem("req_" + field);
+    const el = document.getElementById("req-" + field);
+    if (savedVal && el) {
+      el.innerText = savedVal;
+    }
+
+    // Автосохранение при вводе текста
+    if (el) {
+      el.addEventListener("input", function() {
+        localStorage.setItem("req_" + field, el.innerText.trim());
+      });
+      // Скрытие клавиатуры при нажатии Enter
+      el.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          el.blur();
+        }
+      });
+    }
+  });
+
+  // === 2. КЛИК ПО ИЗОБРАЖЕНИЮ ДЛЯ ВЫБОРА ФОТО ===
+  let isZoomed = false;
+
+  if (img && imageInput) {
+    // Открытие файла по долгому нажатию/двойному клику или специальному триггеру
+    let pressTimer;
+    
+    img.addEventListener("touchstart", function() {
+      if (!isZoomed) {
+        pressTimer = setTimeout(() => {
+          imageInput.click();
+        }, 800); // Зажатие на 0.8 секунды откроет загрузку фото
+      }
+    }, { passive: true });
+
+    img.addEventListener("touchend", function() {
+      clearTimeout(pressTimer);
+    });
+
+    img.addEventListener("touchmove", function() {
+      clearTimeout(pressTimer);
+    });
+
+    // Альтернатива для ПК/тестов в браузере: клик при не увеличенном фото
+    img.addEventListener("contextmenu", function(e) {
+      e.preventDefault();
+      imageInput.click();
+    });
+
+    imageInput.addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const base64Data = event.target.result;
+          img.src = base64Data;
+          try {
+            localStorage.setItem("custom_id_image", base64Data);
+          } catch (err) {
+            console.error("Storage full", err);
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
 
   // === Вкладки ===
   if (tabDoc && tabReq) {
@@ -71,7 +149,6 @@ document.addEventListener("DOMContentLoaded", function() {
   // === PINCH & PAN ZOOM ДЛЯ КАРТОЧКИ ===
   // ==========================================
 
-  const img = document.getElementById("zoomImage");
   const container = document.getElementById("zoomContainer");
 
   if (img && container) {
@@ -91,8 +168,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateTransform() {
+      isZoomed = scale > 1;
       if (scale > 1) {
-        img.style.borderRadius = "0px"; // При увеличении закругление уходит за границы
+        img.style.borderRadius = "0px";
       } else {
         img.style.borderRadius = "16px";
       }
@@ -117,7 +195,6 @@ document.addEventListener("DOMContentLoaded", function() {
       translateY = Math.max(-maxY, Math.min(maxY, translateY));
     }
 
-    // Двойной таб
     img.addEventListener("touchstart", (e) => {
       const now = Date.now();
       if (e.touches.length === 1 && now - lastTap < 300) {
