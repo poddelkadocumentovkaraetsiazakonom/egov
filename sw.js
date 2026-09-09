@@ -21,3 +21,21 @@ self.addEventListener('fetch', (e) => {
     caches.match(e.request).then((res) => res || fetch(e.request))
   );
 });
+const ASSETS = [
+  './',
+  './index.html',
+  './document.html',
+  './style.css',
+  './app.js',
+  './manifest.json',
+  './my-id.jpg',
+  './app-icon.png',
+  './icons/egov-main.png',
+  './icons/e-otinish.png',
+  './icons/zakon.png',
+  './icons/taza-qazaqstan.png',
+  './icons/social-wallet.png',
+  './icons/enotary.png',
+  './icons/oqu.png',
+  './icons/enbek.png'
+];
