@@ -465,13 +465,13 @@ html, body {
 }
 
 /* ========================================= */
-/* === РАЗДЕЛ «СЕРВИСЫ» (ИСПРАВЛЕНИЕ) === */
+/* === РАЗДЕЛ «СЕРВИСЫ» (УВЕЛИЧЕННЫЙ) === */
 /* ========================================= */
 
 .services-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px 10px;
+  gap: 16px 8px;
   margin-bottom: 28px;
 }
 
@@ -482,53 +482,58 @@ html, body {
   text-align: center;
 }
 
-/* Контейнер для иконки 60x60px */
+/* Увеличиваем базовый размер иконки с 60px до 76px */
 .s-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 18px;
+  width: 76px;
+  height: 76px;
+  border-radius: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 6px;
   overflow: hidden;
-  background: transparent;
+  position: relative;
 }
 
-/* Рамка нужна только если исходная картинка без собственного белого фона */
-.icon-circle {
-  background: #ffffff;
-  border: 1px solid #f0f0f2;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-}
-
-/* Первая синяя карточка eGov */
+/* Первая плашка eGov Госуслуги без лишних белых рамок */
 .main-egov-icon {
   background: none;
   border: none;
   box-shadow: none;
 }
 
+/* Белая подложка для остальных иконок */
+.icon-circle {
+  background: #ffffff;
+  border: 1px solid #eef0f4;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Главная иконка eGov (растягиваем на всю ширину) */
 .icon-img-full {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 18px;
+  border-radius: 22px;
   display: block;
 }
 
-/* Картинка иконки забирает 100% пространства блока */
+/* Остальные иконки: масштаб 125% и обрезка краев, 
+   чтобы срезать встроенные подписи и пустые поля */
 .icon-img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Картинка заполняет весь блок без сжатия */
+  object-fit: contain;
+  transform: scale(1.25);
   display: block;
 }
 
 .s-title {
   font-size: 11px;
-  color: #3a3a3c;
-  line-height: 1.2;
+  font-weight: 500;
+  color: #2c2c2e;
+  line-height: 1.25;
+  margin-top: 2px;
 }
 
 /* Нижнее меню */
