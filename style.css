@@ -294,6 +294,9 @@ html, body {
   padding: 12px 16px;
   max-width: 500px;
   margin: 0 auto;
+  overflow-y: auto;
+  height: calc(100vh - 65px);
+  padding-bottom: 80px;
 }
 
 .search-bar {
@@ -325,7 +328,7 @@ html, body {
   border-radius: 10px;
 }
 
-/* Четкая прокрутка баннеров влево/вправо без свободного плавания */
+/* Прокрутка верхних баннеров */
 .top-banners-scroll {
   display: flex;
   gap: 12px;
@@ -389,13 +392,12 @@ html, body {
 }
 .docs-row::-webkit-scrollbar { display: none; }
 
-/* Левая колонка с заголовком и кнопкой */
 .docs-left-col {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-width: 110px;
-  height: 104px; /* По высоте карточки документа */
+  height: 104px;
   flex-shrink: 0;
 }
 
@@ -407,7 +409,6 @@ html, body {
   letter-spacing: -0.3px;
 }
 
-/* Кнопка "Все >" */
 .all-docs-btn {
   background: #f2f2f7;
   border-radius: 18px;
@@ -423,7 +424,6 @@ html, body {
   white-space: nowrap;
 }
 
-/* Карточка документа */
 .doc-card-link {
   display: flex;
   flex-direction: column;
@@ -465,14 +465,14 @@ html, body {
 }
 
 /* ========================================= */
-/* === РАЗДЕЛ «СЕРВИСЫ» (ФИНАЛЬНЫЙ ФИКС) === */
+/* === РАЗДЕЛ «СЕРВИСЫ» ==================== */
 /* ========================================= */
 
 .services-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px 8px;
-  margin-bottom: 28px;
+  gap: 14px 10px;
+  margin-bottom: 24px;
 }
 
 .service-card {
@@ -481,48 +481,127 @@ html, body {
   align-items: center;
 }
 
-/* Фиксированная плашка 68x68 */
 .s-icon {
-  width: 68px;
-  height: 68px;
-  border-radius: 18px;
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: #ffffff;
-  border: 1px solid #f0f0f3;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-/* object-fit: contain сжимает всю картинку (вместе с текстом внутри) целиком в квадрат 68px */
-.icon-img, 
-.icon-img-crop, 
-.icon-img-fit,
 .service-img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  transform: none !important;
-  padding: 2px;
-  display: block;
-}
-
-/* Первая плашка eGov без рамок */
-.main-egov-icon {
-  border: none;
-  box-shadow: none;
-  background: transparent;
-}
-
-.icon-img-full {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 18px;
+  object-fit: contain;
   display: block;
 }
-/* Нижнее меню */
+
+/* ========================================= */
+/* === БАННЕР НАЛОГОВОГО КОДЕКСА =========== */
+/* ========================================= */
+
+.tax-banner {
+  position: relative;
+  width: calc(100% + 32px);
+  margin-left: -16px;
+  margin-right: -16px;
+  height: 125px;
+  background: linear-gradient(135deg, #3264d6 0%, #4f6be4 50%, #3e52c8 100%);
+  padding: 16px 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.tax-content {
+  z-index: 2;
+  max-width: 65%;
+}
+
+.tax-tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  backdrop-filter: blur(4px);
+}
+
+.tax-title {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.tax-badge {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-55%);
+  width: 90px;
+  height: 90px;
+  z-index: 1;
+}
+
+.tax-badge-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.tax-arrow {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 20px;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.tax-dots-capsule {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 4px 10px;
+  border-radius: 12px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  z-index: 2;
+}
+
+.tdot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.tdot.active {
+  background: #ffffff;
+}
+
+.section-header.margin-top {
+  margin-top: 24px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+}
+
+/* ========================================= */
+/* === НИЖНЕЕ МЕНЮ (TAB BAR) =============== */
+/* ========================================= */
+
 .bottom-nav {
   position: fixed;
   bottom: 0;
